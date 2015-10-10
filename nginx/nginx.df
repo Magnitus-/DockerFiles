@@ -6,7 +6,6 @@ RUN apt-get install -y libpcre3-dev build-essential libssl-dev openssl zlib1g zl
 RUN wget --output-document="/opt/nginx-1.8.0.tar.gz" http://nginx.org/download/nginx-1.8.0.tar.gz
 RUN tar -zxvf /opt/nginx-1.8.0.tar.gz -C /opt
 RUN groupadd -r -g 9900 nginx && useradd -rM -g nginx -u 9900 nginx
-RUN chown -R nginx:nginx /opt/nginx-1.8.0
 RUN (cd /opt/nginx-1.8.0; ./configure --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --with-http_realip_module --with-http_addition_module --with-http_sub_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_random_index_module --with-http_secure_link_module --with-http_stub_status_module --with-http_image_filter_module --with-ipv6 --user=nginx --group=nginx)
 RUN (cd /opt/nginx-1.8.0; make)
 RUN (cd /opt/nginx-1.8.0; make install)
