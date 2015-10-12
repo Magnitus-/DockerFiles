@@ -1,0 +1,7 @@
+FROM node:4.1
+RUN apt-get update
+RUN apt-get install unzip
+COPY ["./build-base.sh", "/opt/build-base.sh"]
+RUN chmod +x /opt/build-base.sh
+ENTRYPOINT ["/bin/bash"]
+CMD ["runtest.sh"]

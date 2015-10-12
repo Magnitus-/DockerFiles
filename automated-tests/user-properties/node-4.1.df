@@ -1,11 +1,3 @@
-FROM node:4.1
-RUN apt-get update
-RUN apt-get install unzip
-RUN wget --output-document="/opt/master.zip" https://github.com/Magnitus-/UserProperties/archive/master.zip
-RUN (cd /opt; unzip master.zip)
-RUN (cd /opt/UserProperties-master; npm install)
-RUN touch /bin/runtest.sh
-RUN echo "(cd /opt/UserProperties-master; npm test)" > /bin/runtest.sh
-RUN chmod +x /bin/runtest.sh
-ENTRYPOINT ["/bin/bash"]
-CMD ["runtest.sh"]
+FROM magnitus/automated-tests:node-4.1-base
+ENV PROJECT="UserProperties"
+RUN /opt/build-base.sh
