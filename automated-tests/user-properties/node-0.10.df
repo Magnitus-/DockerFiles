@@ -9,4 +9,3 @@ RUN echo "(cd /opt/UserProperties-master; npm test)" > /bin/runtest.sh
 RUN chmod +x /bin/runtest.sh
 ENTRYPOINT ["/bin/bash"]
 CMD ["runtest.sh"]
-
