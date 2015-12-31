@@ -1,0 +1,10 @@
+electron:
+    image: magnitus/atom-electron:dev-beta
+    environment:
+        - DISPLAY=$DISPLAY
+        - _USER=eric
+        - _UID=1000
+    volumes:
+        - /tmp/.X11-unix:/tmp/.X11-unix
+        - /home/eric
+        - ./app:/home/eric/app
