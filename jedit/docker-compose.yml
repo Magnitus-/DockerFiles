@@ -1,0 +1,10 @@
+jedit:
+    image: magnitus/jedit:latest
+    environment:
+        - DISPLAY=$DISPLAY
+        - _USER=eric
+        - _UID=1000
+    volumes:
+        - /tmp/.X11-unix:/tmp/.X11-unix
+        - /home/eric
+        - /home/eric/Projects:/home/eric/files
