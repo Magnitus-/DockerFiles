@@ -5,7 +5,8 @@ RUN apt-get update && \
     wget 'http://sourceforge.net/projects/jedit/files/jedit-devel/5.2pre1/jedit_5.2pre1_all.deb/download' --output-document=/opt/jedit_5.2pre1_all.deb && \
     dpkg -i /opt/jedit_5.2pre1_all.deb && \
     apt-get purge -y wget && \
-    apt-get clean
+    apt-get clean && \
+    rm /opt/jedit_5.2pre1_all.deb
 COPY ["./entryScript.sh", "/opt/entryScript.sh"]
 RUN chmod +x /opt/entryScript.sh
 ENTRYPOINT ["/bin/bash", "/opt/entryScript.sh"]
