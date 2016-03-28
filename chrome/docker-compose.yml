@@ -1,0 +1,17 @@
+chrome:
+    image: magnitus/chrome:stable
+    net: host
+    cpuset: 0,1
+    mem_limit: 1G
+    devices:
+        - /dev/snd:/dev/snd
+    volumes:
+        - /tmp/.X11-unix:/tmp/.X11-unix
+        - /dev/shm:/dev/shm
+        - /run/dbus:/run/dbus
+        - /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket
+        - $HOME/Downloads:/home/chrome/Downloads
+        - $HOME/.config/google-chrome:/data
+    environment:
+        - DISPLAY=$DISPLAY
+        - _UID=1000

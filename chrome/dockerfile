@@ -1,0 +1,5 @@
+FROM jess/chrome:stable
+COPY ["./entryScript.sh", "/opt/entryScript.sh"]
+RUN chmod +x /opt/entryScript.sh
+ENTRYPOINT ["/bin/bash", "/opt/entryScript.sh"]
+CMD [ "" ]
