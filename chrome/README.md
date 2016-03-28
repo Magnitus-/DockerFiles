@@ -14,5 +14,6 @@ I abstracted necessary runtime arguments in a docker-compose file.
 - Change the mem_limit and cpuset settings to reflect the amount of memory and CPU cores you wish the Chrome container to use
 
 2) Run docker-compose up to launch Chrome
+
 3) Run docker-compose rm to cleanup your environment when done
 
