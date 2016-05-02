@@ -14,5 +14,9 @@ Take the dockerfile-template file and customize it to your needs. Once that is d
 - app content: This should contain your node application (location of package.json file and app-specific entrypoint and dependencies)
 - shared modules content: This should contain any recurring private modules that tend to be used accross apps (or accross containers in the same application if you split it into several containers). They can be required in the code with ```require('shared_modules/<some shared module>')```
 
+##Tag Convention
+
+I tag the images after the version of node that they use.
+
 
  
