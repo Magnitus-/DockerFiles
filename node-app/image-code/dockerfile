@@ -1,0 +1,10 @@
+FROM node:4
+
+COPY ["start.sh","finalize.sh","/usr/bin/"]
+RUN chmod +x /usr/bin/start.sh && chmod +x /usr/bin/finalize.sh
+
+ENV SHARED_DIR /home/node-app/app/node_modules/shared_modules
+RUN mkdir /home/node-app && mkdir /home/node-app/app && mkdir /home/node-app/app/node_modules && mkdir ${SHARED_DIR};
+
+WORKDIR /home/node-app/app
+CMD npm start

@@ -1,0 +1,16 @@
+FROM magnitus/node-app:4
+
+#TODO: Set UID to whichever values makes sense
+ENV UID="1000"
+
+RUN start.sh
+
+#TODO: your app content in /home/node-app/app
+COPY ["app/*","/home/node-app/app"]
+
+#TODO: Copy shared modules in shared modules directory
+COPY ["shared_modules/users", ${SHARED_DIR}/users]
+
+RUN finalize.sh
+
+USER $UID
