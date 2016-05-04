@@ -1,0 +1,6 @@
+app:
+  container_name: node-app-hapi-example
+  image: magnitus/node-app:example-hapi
+  restart: always
+  ports:
+    - "8080:8080"
