@@ -16,7 +16,8 @@ Take the dockerfile-template file and customize it to your needs. Once that is d
 
 ##Tag Convention
 
-I tag the images after the version of node that they use.
+The first number appearing in tag names refers to the version of node the image uses. 
 
+The second number appearing in tag names after the 'v' refers to the revision of the image (which increments as improvements are made).
 
  
