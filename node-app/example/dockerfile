@@ -2,8 +2,6 @@ FROM magnitus/node-app:4
 
 ENV UID="1000"
 
-RUN start.sh
-
 COPY ["app/*","/home/node-app/app/"]
 COPY "shared/user-store" ${SHARED_DIR}/user-store
 

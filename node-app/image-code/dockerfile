@@ -1,10 +1,11 @@
 FROM node:4
 
-ENV SHARED_DIR /home/node-app/app/node_modules/shared_modules
+ENV SHARED_DIR /home/node-app/shared_modules
+ENV APP_DIR /home/node-app/app
 
-COPY ["start.sh","finalize.sh","/usr/bin/"]
-RUN chmod +x /usr/bin/start.sh && chmod +x /usr/bin/finalize.sh && \
-    mkdir /home/node-app && mkdir /home/node-app/app && mkdir /home/node-app/app/node_modules && mkdir ${SHARED_DIR} && \
+COPY ["finalize.sh", "link.js","/usr/bin/"]
+RUN chmod +x /usr/bin/finalize.sh && chmod +x /usr/bin/link.js && \
+    mkdir /home/node-app && mkdir ${APP_DIR} &&  mkdir ${SHARED_DIR} && \
     wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.0.2/dumb-init_1.0.2_amd64 && \
     chmod +x /usr/local/bin/dumb-init
 

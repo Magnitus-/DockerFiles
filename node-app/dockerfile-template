@@ -3,8 +3,6 @@ FROM magnitus/node-app:4
 #TODO: Set UID to whichever values makes sense
 ENV UID="1000"
 
-RUN start.sh
-
 #TODO: your app content in /home/node-app/app
 COPY ["app/*","/home/node-app/app"]
 
