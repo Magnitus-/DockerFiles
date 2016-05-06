@@ -12,6 +12,7 @@
   },
   "devDependencies": {
   },
+  "localDependencies": ["capitalize-array"],
   "license": "MIT",
   "directories": {
   },

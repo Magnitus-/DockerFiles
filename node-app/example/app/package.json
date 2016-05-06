@@ -12,6 +12,7 @@
   },
   "devDependencies": {
   },
+  "localDependencies": ["user-store"],
   "license": "MIT",
   "directories": {
   },
