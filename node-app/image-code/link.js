@@ -10,4 +10,11 @@ fs.readdirSync(process.env.SHARED_DIR).forEach(function(dirname) {
     childProcess.execSync("npm link");
     process.chdir(process.env.APP_DIR);
     childProcess.execSync("npm link "+package.name);
+    fs.readdirSync(process.env.SHARED_DIR).forEach(function(otherDirname) {
+        if(otherDirname != dirname)
+        {
+            process.chdir(path.join(process.env.SHARED_DIR, otherDirname));
+            childProcess.execSync("npm link "+package.name);
+        }
+    });
 });

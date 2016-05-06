@@ -4,7 +4,7 @@ FROM magnitus/node-app:4
 ENV UID="1000"
 
 #TODO: your app content in /home/node-app/app
-COPY ["app/*","/home/node-app/app"]
+COPY "app/*" ${APP_DIR}/
 
 #TODO: Copy shared modules in shared modules directory
 COPY ["shared_modules/users", ${SHARED_DIR}/users]

@@ -12,7 +12,7 @@ Take the dockerfile-template file and customize it to your needs. Once that is d
 
 - UID Environment Variable: Determines the user and group ID that the node app will run under in the container
 - app content: This should contain your node application (location of package.json file and app-specific entrypoint and dependencies)
-- shared modules content: This should contain any recurring private modules that tend to be used accross apps (or accross containers in the same application if you split it into several containers). They can be required in the app by their module name (as defined in their package.json file).
+- shared modules content: This should contain any recurring private modules that tend to be used accross apps (or accross containers in the same application if you split it into several containers). They can be required in the app (and in other shared modules) by their module name (as defined in their package.json file).
 
 ##Tag Convention
 

@@ -2,7 +2,7 @@ FROM magnitus/node-app:4
 
 ENV UID="1000"
 
-COPY ["app/*","/home/node-app/app/"]
+COPY "app/* ${APP_DIR}/
 
 RUN finalize.sh
 

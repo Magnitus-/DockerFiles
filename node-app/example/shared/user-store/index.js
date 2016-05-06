@@ -1,5 +1,7 @@
+const CapitalizeArray = require('capitalize-array');
+
 module.exports = {
     'getUsers': function() {
-        return ['sally','craigs','chris','tom'];
+        return CapitalizeArray(['sally','craigs','chris','tom']);
     }
 }
