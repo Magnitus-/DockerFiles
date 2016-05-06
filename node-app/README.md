@@ -16,7 +16,7 @@ Take the dockerfile-template file and customize it to your needs. Once that is d
 
 This should contain any recurring private modules that tend to be used accross apps (or accross containers in the same application if you split it into several containers). 
 
-Those modules can be expressed as a dependency elsewhere by adding their name to the 'localDependencies' in the package.json file of the depend (which is an array of shared module names, as named in their respectif package.json files, see the example).
+Those modules can be expressed as a dependency elsewhere by adding their name to the 'localDependencies' entry in the package.json file of the dependent (which is an array of shared module names, as named in their respectif package.json files, see the example).
 
 Afterwards, they can be required by the dependend by their module name (as defined in their package.json file).
 
