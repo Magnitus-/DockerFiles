@@ -1,0 +1,13 @@
+app:
+  container_name: <<build-example>>
+  image: magnitus/node-app:dockerfile-builder
+  environment:
+    - UID=<<1000>>
+    - OUTPUT_UID=<<1000>>
+    - OUTPUT_IMAGE=<<magnitus/node-app:dockerfile-builder-example>>
+    - IGNORE=.+~$$
+  volumes:
+    - <<./app>>:/opt/app
+    - <<./shared>>:/opt/shared
+    - <<./output>>:/opt/output
+    - /var/run/docker.sock:/var/run/docker.sock

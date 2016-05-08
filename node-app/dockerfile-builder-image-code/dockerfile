@@ -3,6 +3,7 @@ FROM docker:1.11
 ENV TEMPLATE_PATH /opt/build/template
 ENV APP_DIR /opt/app
 ENV SHARED_DIR /opt/shared
+ENV OUTPUT_DIR /opt/output
 
 RUN apk add --no-cache nodejs
 COPY ["app/", "/opt/build/"]

@@ -15,6 +15,6 @@ module.exports = function (rootPath, destination)
         }
     });
     
-    copyAppCmd += destination+"]";
+    copyAppCmd += ("\""+destination+"/\"]");
     return copyAppCmd;
 }
