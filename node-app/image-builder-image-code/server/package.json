@@ -1,5 +1,5 @@
 {
-  "name": "builder-app",
+  "name": "builder-app-server",
   "version": "1.0.0",
   "main": "index.js",
   "licenses": [
@@ -9,6 +9,8 @@
     }
   ],
   "dependencies": {
+      "hapi": "13.x",
+      "inert": ""
   },
   "devDependencies": {
   },

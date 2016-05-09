@@ -3,11 +3,11 @@
 const fs = require('fs');
 const path = require('path');
 const childProcess = require('child_process');
-const chownr = require('chownr');
-const cpr = require('cpr');
 
 const getCopyCmd = require('./getCopyCmd');
 const getCopySharedCmd = require('./getCopySharedCmd');
+
+var exitCode = 0;
 
 //Read template in memory
 var output = fs.readFileSync(process.env.TEMPLATE_PATH, 'utf8');
@@ -22,13 +22,20 @@ console.log("*********************************");
 console.log(output);
 console.log("*********************************");
 
+const serverProcess = childProcess.spawn('npm', ['start'], {'cwd': process.env.SERVER_DIR});
+
+serverProcess.on('exit', (code) => {
+    process.exit(exitCode);
+});
+
 const buildProcess = childProcess.spawn('docker', ['build', '-t', process.env.OUTPUT_IMAGE, '-'], {'cwd': '/opt'});
 
 buildProcess.stdout.pipe(process.stdout);
 buildProcess.stderr.pipe(process.stderr);
 
 buildProcess.on('exit', (code) => {
-  process.exit(code);
+    exitCode = code;
+    serverProcess.kill('SIGTERM');
 });
 
 buildProcess.stdin.write(output);
