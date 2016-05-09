@@ -1,0 +1,23 @@
+{
+  "name": "builder-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "licenses": [
+    {
+      "type": "MIT License",
+      "url": "http://mit-license.org/"
+    }
+  ],
+  "dependencies": {
+      "chownr": "1.x",
+      "cpr": "1.x"
+  },
+  "devDependencies": {
+  },
+  "license": "MIT",
+  "directories": {
+  },
+  "scripts": {
+      "start": "node index.js"
+  }
+}

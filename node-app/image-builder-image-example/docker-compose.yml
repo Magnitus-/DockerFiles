@@ -1,0 +1,11 @@
+app:
+  container_name: build-image-example
+  image: magnitus/node-app:image-builder
+  environment:
+    - UID=1000
+    - OUTPUT_IMAGE=magnitus/node-app:image-builder-example
+    - IGNORE=.+~$$
+  volumes:
+    - ./app:/opt/app
+    - ./shared:/opt/shared
+    - /var/run/docker.sock:/var/run/docker.sock
