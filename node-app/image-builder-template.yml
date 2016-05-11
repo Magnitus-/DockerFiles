@@ -1,0 +1,16 @@
+app:
+  container_name: <<build-image-example>>
+  image: magnitus/node-app:image-builder
+  environment:
+    - UID=<<1000>>
+    - OUTPUT_IMAGE=<<magnitus/node-app:image-builder-example>>
+    - IGNORE=<<.+~$$>>
+    - EXTERNAL_PORT=<<8080>>
+    - DOCKER_LOCALHOST=<<172.17.0.1>>
+    - CACHE=<<no>>
+  volumes:
+    - <<./app>>:/opt/app
+    - <<./shared>>:/opt/shared
+    - /var/run/docker.sock:/var/run/docker.sock
+  ports:
+    - "<<8080>>:8080"

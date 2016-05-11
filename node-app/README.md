@@ -34,9 +34,9 @@ The 'base-image-example' directory contain an example of a manually generated do
 
 The 'base-image-example' directory contain an example for a basic 'hello-world' hapi app.
 
-###Automated Dockerfile Creation Using dockerfile-builder image
+###Automated Dockerfile Creation Using the dockerfile-builder image and dockerfile-builder-template docker-compose file
 
-Take the docker-compose-template.yml and customize is for your needs (any parts between <<...>> should be customised).
+Take the dockerfile-builder-template.yml docker-compose file and customize is for your needs (any parts between <<...>> should be customised).
 
 ####Customizations
 
@@ -57,4 +57,39 @@ The dockerfile should appear in the specified output directory along with a buil
 
 ####Examples
 
-The 'dockerfile-builder-image-example' directory contain an previous example, adapted to have its dockerfile automatically generated.
+The 'dockerfile-builder-image-example' directory contain an example, adapted to have its dockerfile automatically generated.
+
+###Automated Image Creation Using the image-builder image and image-builder-template docker-compose file
+
+Take the image-builder-template.yml docker-compose file and customize is for your needs (any parts between <<...>> should be customised).
+
+####Build Note
+
+Because the docker client runs in a container and the docker daemon that actually builds the image runs on the local machine outside the container the client runs on, I had to do a work-around to make the app files available to the daemon.
+
+Basically, the client runs an http file server and passes in the dockerfile wget commands to the daemon to fetch the files from the server. This means that the build container must map a port to the local machine.
+
+Furthermore, it implies an additional delay at build time, but it also makes the resulting image more efficient (all files are imported in a single RUN statement resulting in a single layer).
+
+####Customizations
+
+* container-name: Name of the container that builds the image (mostly useful to avoid name clashed with already running containers)
+* environment
+    * UID: Running user ID of the image
+    * OUTPUT_IMAGE: Full image name of the resulting image
+    * IGNORE: Regex pattern identifiying files that the dockerfile should not copy (for example, my text editor always creates backup files ending with ~ that I don't want included in a production image)
+    * EXTERNAL_PORT: Port on your local machine that your container maps to. It's extremely important that this value corresponds to the mapping that you give in the "ports" section.
+    * DOCKER_LOCALHOST: Address if your localhost machine on the docker networking interface (in Linux, run ifconfig to find it, you should have a 'docker0' interface by default with an 'inet addr' entry)
+    * CACHE: Whether to use cached intermediate images or not when building anew (should be yes or no) 
+* volume mapping
+    * App directory: Change the LHS of the volume mapping to map to the directory where your app is contained
+    * Shared directory: Change the LHS of the volume mapping to map to the directory where your local shared modules are located
+* ports: Change the LHS entry to a free port on your host. Don't forget to give the same value to the EXTERNAL_PORT environment variable.
+    
+####Output
+
+The corresponding image should have been built by the docker-daemon on your machine. 
+
+####Examples
+
+The 'image-builder-image-example' directory contain an example, adapted to have its image automatically generated (port 8080 will need to be free on your machine for the example to work).
