@@ -6,7 +6,7 @@ ENV SHARED_DIR /opt/shared
 
 ENV SERVER_DIR /opt/server;
 
-RUN apk add --no-cache nodejs
+RUN apk add --no-cache nodejs && apk add --no-cache wget
 
 COPY ["app/", "/opt/build/"]
 RUN (cd /opt/build; npm install)

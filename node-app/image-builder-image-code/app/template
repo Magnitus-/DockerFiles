@@ -2,9 +2,7 @@ FROM magnitus/node-app:4
 
 ENV UID="{{UID}}"
 
-{{COPY_APP}}
-
-{{COPY_SHARED}}
+{{COPY_ALL}}
 
 RUN finalize.sh
 

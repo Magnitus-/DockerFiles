@@ -11,13 +11,23 @@ server.register(Inert, () => {});
 server.route([
 { 
    method: 'GET', 
-   path: '/.well-known/acme-challenge/{param*}', 
+   path: (process.env.APP_DIR+'/{param*}'), 
    handler: { 
                 directory: { 
-                    path: '/home/node-app/challenge' 
+                    path: process.env.APP_DIR 
                 }
             }
-}]);
+},
+{ 
+   method: 'GET', 
+   path: (process.env.SHARED_DIR+'/{param*}'), 
+   handler: { 
+                directory: { 
+                    path: process.env.SHARED_DIR
+                }
+            }
+}
+]);
 
 server.start((err) => {
     if (err) {
