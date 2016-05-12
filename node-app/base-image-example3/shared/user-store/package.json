@@ -1,0 +1,21 @@
+{
+  "name": "user-store",
+  "version": "1.0.0",
+  "main": "index.js",
+  "licenses": [
+    {
+      "type": "MIT License",
+      "url": "http://mit-license.org/"
+    }
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "localDependencies": ["capitalize-array", "sort-array"],
+  "license": "MIT",
+  "directories": {
+  },
+  "scripts": {
+  }
+}

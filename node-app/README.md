@@ -2,7 +2,26 @@
 
 ##Purpose
 
-This image provides a skeleton from which custom production images can quickly be build.
+This image provides tools to build custom production images can quickly be build.
+
+##Assumptions on app structure
+
+The images provided here assume that your app is broken down in two components:
+
+- Main App (required): Main app that contains code specialized for the application.
+- Shared modules (optional): Re-usable modules that are not published in a registry (and thus cannot be resolved by npm install), but that may be shared by several apps (or perhaps various parts of your main app if it is split in sub-apps)
+
+###package.json requirements
+
+The shared modules and your main app should all contain a package.json file (and in the case of the shared modules, they should have a unique name)
+
+Also, all parts that use shared modules (your main app or other shared modules) should list the shared modules that they use (by name) in the "localDependencies" entry (see the examples)
+
+###Degree of support
+
+- Base Image: The base image, during image construction, will recursively traverse directories in the shared modules, find all modules (it will stop recursing in sub-directories of directories containing a package.json file) and resolve depencencies (in the main app and other shared modules) via linking.
+- Dockerfile Builder: Currently, the dockerfile builder will create dockerfiles and selectively package all dependencies by looking at the top level directories of shared modules only (it does not traverse sub-directories). I plan to make it recursive soon.
+- Image Builder: Currently, the image builder does not selectively package depdencies (it packages the entire content of shared modules with the app). I plan to make it package solely dependencies soon.
 
 ##Usage
 

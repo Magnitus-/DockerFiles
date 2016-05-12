@@ -1,0 +1,11 @@
+FROM magnitus/node-app:4-slim
+
+ENV UID="1000"
+
+COPY "app/*" ${APP_DIR}/
+COPY "shared/user-store" ${SHARED_DIR}/user-store
+COPY "shared/capitalize-array" ${SHARED_DIR}/capitalize-array
+
+RUN finalize.sh
+
+USER $UID

@@ -1,0 +1,12 @@
+FROM magnitus/node-app:4
+
+ENV UID="1000"
+
+COPY "app/*" ${APP_DIR}/
+COPY "shared/user-store" ${SHARED_DIR}/user-store
+COPY "shared/array/capitalize-array" ${SHARED_DIR}/array/capitalize-array
+COPY "shared/array/sort-array" ${SHARED_DIR}/array/sort-array
+
+RUN finalize.sh
+
+USER $UID

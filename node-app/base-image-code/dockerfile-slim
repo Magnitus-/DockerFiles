@@ -1,4 +1,4 @@
-FROM node:4
+FROM node:4-slim
 
 ENV SHARED_DIR /home/node-app/shared_modules
 ENV APP_DIR /home/node-app/app
