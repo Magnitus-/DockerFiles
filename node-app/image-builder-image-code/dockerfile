@@ -4,7 +4,9 @@ ENV TEMPLATE_PATH /opt/build/template
 ENV APP_DIR /opt/app
 ENV SHARED_DIR /opt/shared
 
-ENV SERVER_DIR /opt/server;
+ENV SERVER_DIR /opt/server
+
+ENV DEFAULT_SOURCE_IMAGE magnitus/node-app:4
 
 RUN apk add --no-cache nodejs && apk add --no-cache wget
 

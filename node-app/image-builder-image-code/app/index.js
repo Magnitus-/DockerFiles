@@ -8,8 +8,12 @@ const wgetDirCmd = require('./wgetDirCmd');
 
 var exitCode = 0;
 
+var source_image = process.env.SOURCE_IMAGE ? process.env.SOURCE_IMAGE : process.env.DEFAULT_SOURCE_IMAGE;
+
 //Read template in memory
 var output = fs.readFileSync(process.env.TEMPLATE_PATH, 'utf8');
+
+output = output.replace(/{{SOURCE}}/, source_image);
 
 //Plug values in template
 output = output.replace(/{{UID}}/, process.env.UID);

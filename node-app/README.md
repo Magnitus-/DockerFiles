@@ -95,6 +95,7 @@ Furthermore, it implies an additional delay at build time, but it also makes the
 * container-name: Name of the container that builds the image (mostly useful to avoid name clashed with already running containers)
 * environment
     * UID: Running user ID of the image
+    * SOURCE_IMAGE: This optional environment variable allows you to use a source image other than the default (magnitus/node-app:4 at the time of this writing). Useful if you want to use the slim version (magnitus/node-app:4-slim) or an image that adds extra stuff to the default image (extra environment variables, global modules, etc)
     * OUTPUT_IMAGE: Full image name of the resulting image
     * IGNORE: Regex pattern identifiying files that the dockerfile should not copy (for example, my text editor always creates backup files ending with ~ that I don't want included in a production image)
     * EXTERNAL_PORT: Port on your local machine that your container maps to. It's extremely important that this value corresponds to the mapping that you give in the "ports" section.

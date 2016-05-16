@@ -1,4 +1,4 @@
-FROM magnitus/node-app:4
+FROM {{SOURCE}}
 
 ENV UID="{{UID}}"
 
