@@ -16,7 +16,7 @@ function actOnModules(directory, action)
         else
         {
             files.forEach(function(file) {
-                if(fs.lstatSync(path.join(directory, file)).isDirectory())
+                if(fs.lstatSync(path.join(directory, file)).isDirectory() && file != "node_modules")
                 {
                     actOnModules(path.join(directory, file), action);
                 }

@@ -8,7 +8,7 @@ var actOnModules = require('./actOnModules');
 function npmInstall(directory)
 {
     process.chdir(directory);
-    childProcess.execSync("npm install");
+    childProcess.execSync("npm install --production");
 }
 
 actOnModules(process.env.APP_DIR, npmInstall);
