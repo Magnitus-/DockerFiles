@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const childProcess = require('child_process');
 
+const dependencies = (require('./compileDependencies')());
 const wgetDirCmd = require('./wgetDirCmd');
 
 var exitCode = 0;
@@ -23,7 +24,9 @@ var wgetFilesCmd =  wgetDirCmd(process.env.APP_DIR, "${APP_DIR}", process.env.AP
 try
 {
     fs.accessSync(process.env.SHARED_DIR, fs.F_OK);
-    wgetFilesCmd = wgetFilesCmd + wgetDirCmd(process.env.SHARED_DIR, "${SHARED_DIR}", process.env.SHARED_DIR, " && ");
+    Object.keys(dependencies['dependencies']).forEach((module) => {
+        wgetFilesCmd = wgetFilesCmd + wgetDirCmd(dependencies['pathsByModule'][module], "${SHARED_DIR}", process.env.SHARED_DIR, " && ");
+    });    
 }
 catch(err)
 {

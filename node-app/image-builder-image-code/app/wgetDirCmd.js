@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const compileDependencies = require('./compileDependencies');
 
 var ignoreRegex = process.env.IGNORE ? new RegExp(process.env.IGNORE) : null;
 

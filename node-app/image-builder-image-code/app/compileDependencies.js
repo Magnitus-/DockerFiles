@@ -28,11 +28,15 @@ function compileDependencies(currentModule, info)
     {
         return;
     }
-    info.dependenciesByModule[currentModule].forEach((dependency) => {
-        info.resolvedDependencies[currentModule] = true;
-        info.dependencies[dependency] = true;
-        compileDependencies(dependency, info);
-    });
+    
+    info.resolvedDependencies[currentModule] = true;
+    if(info.dependenciesByModule[currentModule])
+    {
+        info.dependenciesByModule[currentModule].forEach((dependency) => {
+            info.dependencies[dependency] = true;
+            compileDependencies(dependency, info);
+        });
+    }
 }
 
 module.exports = function() {
