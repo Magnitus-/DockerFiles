@@ -22,7 +22,7 @@ Note that these "global" npm modules are fallbacks will only be used by your app
 
 In the context of application-specific containers with a lot of in-house modules, I think it's a decent compromise between global hell and DRY. 
 
-This allows you to do something like this: say that your app and all shared modules but one use version 3 of bluebird and one shared module use version 2 of bluebird, you can put 'bluebird@3' in the NPM_MODULES environment variable and then put a version 7 dependency in the package.json file of the shared module that uses version 2.
+This allows you to do something like this: say that your app and all shared modules but one use version 3 of bluebird and one shared module use version 2 of bluebird, you can put 'bluebird@3' in the NPM_MODULES environment variable and then put a version 2 dependency in the package.json file of the shared module that uses version 2.
 
 ###Tag Convention
 
