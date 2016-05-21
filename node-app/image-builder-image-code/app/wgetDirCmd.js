@@ -24,7 +24,7 @@ function wgetDirCmd(rootPath, destination , trimToDestination, prefix)
                 {
                     cmd += " && ";
                 }
-                cmd += ("mkdir "+path.join(rootPath, filename).replace(trimToDestination, destination) + " && " + cmdForDir)
+                cmd += (" " + cmdForDir)
             }
             else
             {
@@ -40,7 +40,7 @@ function wgetDirCmd(rootPath, destination , trimToDestination, prefix)
                 
                 acceptExtensionFlag = path.extname(filename) != '' ? '-A'+path.extname(filename) : '';
                 
-                cmd += ("wget 'http://"+process.env.DOCKER_LOCALHOST+":"+process.env.EXTERNAL_PORT+path.join(rootPath, filename) + "' --output-document=\"" + path.join(destination, path.join(rootPath, filename).replace(trimToDestination+"/", ""))+"\"");
+                cmd += ("mkdir -p "+rootPath.replace(trimToDestination, destination)+" && wget 'http://"+process.env.DOCKER_LOCALHOST+":"+process.env.EXTERNAL_PORT+path.join(rootPath, filename) + "' --output-document=\"" + path.join(destination, path.join(rootPath, filename).replace(trimToDestination+"/", ""))+"\"");
             }
         }
     });
