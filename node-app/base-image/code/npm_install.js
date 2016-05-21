@@ -13,3 +13,16 @@ function npmInstall(directory)
 
 actOnModules(process.env.APP_DIR, npmInstall);
 actOnModules(process.env.SHARED_DIR, npmInstall);
+
+if(process.env.NPM_MODULES)
+{
+    var modules = process.env.NPM_MODULES.replace(' ','').split(';');
+    if(modules.length > 0)
+    {
+        process.chdir(process.env.HOME_DIR);
+        modules.forEach(function(module) {
+            childProcess.execSync("npm install "+module);
+        });
+    }
+    
+} 

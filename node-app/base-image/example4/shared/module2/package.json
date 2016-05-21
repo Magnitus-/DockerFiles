@@ -1,0 +1,21 @@
+{
+  "name": "module2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "licenses": [
+    {
+      "type": "MIT License",
+      "url": "http://mit-license.org/"
+    }
+  ],
+  "dependencies": {
+      "xregexp": "2.x"
+  },
+  "devDependencies": {
+  },
+  "license": "MIT",
+  "directories": {
+  },
+  "scripts": {
+  }
+}

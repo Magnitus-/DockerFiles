@@ -1,0 +1,22 @@
+{
+  "name": "sample-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "licenses": [
+    {
+      "type": "MIT License",
+      "url": "http://mit-license.org/"
+    }
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "localDependencies": ["module1","module2"],
+  "license": "MIT",
+  "directories": {
+  },
+  "scripts": {
+      "start": "node index.js"
+  }
+}

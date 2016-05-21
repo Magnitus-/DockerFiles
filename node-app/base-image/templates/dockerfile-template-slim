@@ -7,7 +7,12 @@ ENV UID="1000"
 COPY "app/*" ${APP_DIR}/
 
 #TODO: Copy shared modules in shared modules directory
+#      You can also simply omit the statement if you do not use shared modules
 COPY ["shared_modules/users", ${SHARED_DIR}/users]
+
+#TODO: Copy list of semi-colon separated npm module names that should be availabe by default everywhere in your project
+#      You can also simply omit the declaration of this environment variable if you don't want to use any
+ENV NPM_MODULES="bluebird@3;xregexp@3"
 
 RUN finalize.sh
 
