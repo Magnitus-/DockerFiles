@@ -1,8 +1,8 @@
-#Automated Image Creation Using the image-builder Image and Customized docker-compose.yml File Derived From the Template
+##Automated Image Creation Using the image-builder Image and Customized docker-compose.yml File Derived From the Template
 
 Take the docker-compose.yml template file and customize is for your needs (any parts between <<...>> should be customised).
 
-##Build Note
+###Build Note
 
 Because the docker client runs in a container and the docker daemon that actually builds the image runs on the local machine outside the container the client runs on, I had to do a work-around to make the app files available to the daemon.
 
@@ -10,7 +10,7 @@ Basically, the client runs an http file server and passes in the dockerfile wget
 
 Furthermore, it implies an additional delay at build time, but it also makes the resulting image more efficient (all files are imported in a single RUN statement resulting in a single layer).
 
-##Customizations
+###Customizations
 
 * container-name: Name of the container that builds the image (mostly useful to avoid name clashed with already running containers)
 * environment
@@ -26,10 +26,10 @@ Furthermore, it implies an additional delay at build time, but it also makes the
     * Shared directory: Change the LHS of the volume mapping to map to the directory where your local shared modules are located
 * ports: Change the LHS entry to a free port on your host. Don't forget to give the same value to the EXTERNAL_PORT environment variable.
     
-##Output
+###Output
 
 The corresponding image should have been built by the docker-daemon on your machine. 
 
-##Examples
+###Examples
 
 The 'image-builder-image-example' directory contain an example, adapted to have its image automatically generated (port 8080 will need to be free on your machine for the example to work).

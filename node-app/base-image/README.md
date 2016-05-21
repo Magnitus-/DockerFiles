@@ -1,8 +1,8 @@
-#Manual Dockerfile Creation From Base Image and Customization of 'dockerfile-template' 
+##Manual Dockerfile Creation From Base Image and Customization of 'dockerfile-template' 
 
 Take the dockerfile-template file (or the dockerfile-template-slim file if your prefer more barebone small images) and customize it to your needs. Once that is done, use the modified dockerfile to build your production image.
 
-##Customizations
+###Customizations
 
 - UID Environment Variable: Determines the user and group ID that the node app will run under in the container
 - app content: This should contain your node application (location of package.json file and app-specific entrypoint and dependencies)
@@ -14,13 +14,13 @@ Those modules can be expressed as a dependency elsewhere by adding their name to
 
 Afterwards, they can be required by the dependend by their module name (as defined in their package.json file).
 
-##Tag Convention
+###Tag Convention
 
 The first number appearing in tag names refers to the version of node the image uses. 
 
 The second number appearing in tag names after the 'v' refers to the revision of the image (which increments as improvements are made).
 
-##Examples
+###Examples
 
 The 'example' directory contain an example of a manually generated dockerfile for a project with shared dependencies.
 

@@ -1,8 +1,8 @@
-#Automated Dockerfile Creation Using the dockerfile-builder Image and a Customized docker-compose.yml File Derived From the Template
+##Automated Dockerfile Creation Using the dockerfile-builder Image and a Customized docker-compose.yml File Derived From the Template
 
 Take the docker-compose.yml template file and customize is for your needs (any parts between <<...>> should be customised).
 
-##Customizations
+###Customizations
 
 * container-name: Name of the container that builds the dockerfile (mostly useful to avoid name clashed with already running containers)
 * environment
@@ -15,10 +15,10 @@ Take the docker-compose.yml template file and customize is for your needs (any p
     * Shared directory: Change the LHS of the volume mapping to map to the directory where your local shared modules are located
     * Ouput directory: Change the LHS of the volume mapping to map to the directory where you would like your dockerfile, build script and other dependencies generated
 
-##Output
+###Output
 
 The dockerfile should appear in the specified output directory along with a build.sh bash script to build it.
 
-##Examples
+###Examples
 
 The 'dockerfile-builder-image-example' directory contain an example, adapted to have its dockerfile automatically generated.
