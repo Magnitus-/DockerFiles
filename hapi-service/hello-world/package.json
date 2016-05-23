@@ -1,0 +1,17 @@
+{
+  "name": "geev-hello-word",
+  "version": "0.1.0",
+  "description": "Tractr private app.",
+  "author": "Eric Vallee <eric_vallee@webificservices.com>",
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:tractrs/geev-api.git"
+  },
+  "dependencies": {
+      "hapi": "13.x"
+  },
+  "scripts": {
+      "start": "node ./index.js"
+  }
+}

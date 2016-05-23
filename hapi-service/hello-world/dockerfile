@@ -1,0 +1,11 @@
+FROM magnitus/node-app:4-slim
+
+ENV UID="1000"
+
+COPY ["index.js", "package.json", "${APP_DIR}/"]
+
+RUN finalize.sh
+
+USER $UID
+
+EXPOSE 8080
