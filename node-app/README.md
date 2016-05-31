@@ -6,13 +6,19 @@ Collection of images to build custom production node application images.
 
 ##Images
 
-The Project has 3 main images. Read the documentation provided in the directory of each image for more details about their usage.
+The Project has 4 main images. Read the documentation provided in the directory of each image for more details about their usage.
 
 ###base-image
 
 Base image to build node applications. It can be used on its own by manually building a production dockerfile from the provided template.
 
 Tags: 4, latest, 4v{version of the image}, 4-slim
+
+###base-dev-image
+
+Development image, meant to be used for code that changes often in a mapped volume outside the image.
+
+Tags: 4-dev
 
 ###dockerfile-builder
 

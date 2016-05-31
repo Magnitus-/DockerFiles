@@ -1,0 +1,9 @@
+app:
+  image: magnitus/node-app:4-dev
+  container_name: node-app-dev-example
+  environment:
+    - UID=1000
+    - NPM_MODULES=bluebird@3;xregexp@3.1.1
+  volumes:
+    - ./app:/home/node-app/app
+    - ./shared:/home/node-app/shared_modules
