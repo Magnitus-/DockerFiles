@@ -6,8 +6,13 @@ if ! id "node-app" >/dev/null 2>&1; then
     grpconv;
 fi
 
-npm_install.js;
-link.js;
+if [ ! -z "$ALWAYS_INSTALL" ] || [ ! -f "${HOME_DIR}/installation_done" ] ; then
+    npm_install.js;
+    link.js;
+    if [ -z "$ALWAYS_INSTALL" ] ; then
+        touch ${HOME_DIR}/installation_done;
+    fi
+fi
 
 chown -R ${UID}:${UID} /home/node-app;
 chown -R ${UID}:${UID} ${SHARED_DIR};
