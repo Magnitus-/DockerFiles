@@ -16,15 +16,19 @@ function wgetDirCmd(rootPath, destination , trimToDestination, prefix)
             if(fs.lstatSync(path.join(rootPath, filename)).isDirectory())
             {
                 var cmdForDir = wgetDirCmd(path.join(rootPath, filename), destination, trimToDestination, "");
-                if((!addedOne) && cmdForDir != "")
+                if(cmdForDir != "")
                 {
-                    addedOne = true;
+                    if((!addedOne))
+                    {
+                        addedOne = true;
+                        cmd += " ";
+                    }
+                    else
+                    {
+                        cmd += " && ";
+                    }
+                    cmd += cmdForDir;
                 }
-                else
-                {
-                    cmd += " && ";
-                }
-                cmd += (" " + cmdForDir)
             }
             else
             {
