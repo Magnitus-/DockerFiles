@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const childProcess = require('child_process');
-var actOnModules = require('./actOnModules');
+var actOnModules = require('act-on-modules');
 
 function linkGlobally(directory)
 {

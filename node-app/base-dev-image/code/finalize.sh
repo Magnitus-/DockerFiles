@@ -7,8 +7,8 @@ if ! id "node-app" >/dev/null 2>&1; then
 fi
 
 if [ ! -z "$ALWAYS_INSTALL" ] || [ ! -f "${HOME_DIR}/installation_done" ] ; then
-    npm_install.js;
-    link.js;
+    /opt/app-setup/npm_install.js;
+    /opt/app-setup/link.js;
     if [ -z "$ALWAYS_INSTALL" ] ; then
         touch ${HOME_DIR}/installation_done;
     fi
