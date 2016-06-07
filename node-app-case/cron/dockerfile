@@ -1,0 +1,6 @@
+FROM magnitus/node-app:4
+
+RUN apt-get update && apt-get -y install cron;
+RUN echo "\n\n/opt/app-setup/cron.js" >> /usr/local/bin/finalize.sh;
+
+CMD cron
