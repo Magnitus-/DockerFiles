@@ -20,7 +20,8 @@ Furthermore, it implies an additional delay at build time, but it also makes the
     * IGNORE: Regex pattern identifiying files that the dockerfile should not copy (for example, my text editor always creates backup files ending with ~ that I don't want included in a production image)
     * EXTERNAL_PORT: Port on your local machine that your container maps to. It's extremely important that this value corresponds to the mapping that you give in the "ports" section.
     * DOCKER_LOCALHOST: Address if your localhost machine on the docker networking interface (in Linux, run ifconfig to find it, you should have a 'docker0' interface by default with an 'inet addr' entry)
-    * CACHE: Whether to use cached intermediate images or not when building anew (should be yes or no) 
+    * CACHE: Whether to use cached intermediate images or not when building anew (should be yes or no)
+    * NPM_COMMAND: This optional environment variable allows you to specify which npm command is used to launch the app when a container boots from the generated image. Defaults to 'start' (ie, npm run start).
 * volume mapping
     * App directory: Change the LHS of the volume mapping to map to the directory where your app is contained
     * Shared directory: Change the LHS of the volume mapping to map to the directory where your local shared modules are located

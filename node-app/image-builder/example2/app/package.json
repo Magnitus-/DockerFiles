@@ -1,7 +1,6 @@
 {
-  "name": "builder-app",
+  "name": "sample-test",
   "version": "1.0.0",
-  "main": "index.js",
   "licenses": [
     {
       "type": "MIT License",
@@ -9,14 +8,15 @@
     }
   ],
   "dependencies": {
-    "act-on-modules": "0.1.0"
+      "nodeunit": "^0.9.1"
   },
   "devDependencies": {
   },
+  "localDependencies": ["is-prime"],
   "license": "MIT",
   "directories": {
   },
   "scripts": {
-      "start": "node index.js"
+    "test": "./node_modules/nodeunit/bin/nodeunit test"
   }
 }
