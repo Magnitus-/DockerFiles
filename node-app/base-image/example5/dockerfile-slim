@@ -1,0 +1,12 @@
+FROM magnitus/node-app:4-slim
+
+ENV UID="1000"
+ENV NPM_COMMAND test
+
+COPY "app/*" ${APP_DIR}/
+COPY "app/test/* ${APP_DIR}/test/
+COPY shared/* ${SHARED_DIR}/
+
+RUN finalize.sh
+
+USER $UID

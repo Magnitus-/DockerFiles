@@ -1,5 +1,5 @@
 {
-  "name": "builder-app",
+  "name": "is-prime",
   "version": "1.0.0",
   "main": "index.js",
   "licenses": [
@@ -9,7 +9,6 @@
     }
   ],
   "dependencies": {
-    "act-on-modules": "0.1.0"
   },
   "devDependencies": {
   },
@@ -17,6 +16,5 @@
   "directories": {
   },
   "scripts": {
-      "start": "node index.js"
   }
 }

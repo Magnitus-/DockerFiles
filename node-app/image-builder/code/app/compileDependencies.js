@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const actOnModules = require('./actOnModules');
+const actOnModules = require('act-on-modules');
 
 var mainKey = '!APP!';
 
@@ -42,9 +42,9 @@ function compileDependencies(currentModule, info)
 module.exports = function() {
     var compileInfoBound = compileInfo.bind(info);
     info.mainModule = true;
-    actOnModules(process.env.APP_DIR, compileInfoBound);
+    actOnModules.sync(process.env.APP_DIR, compileInfoBound);
     info.mainModule = false;
-    actOnModules(process.env.SHARED_DIR, compileInfoBound);
+    actOnModules.sync(process.env.SHARED_DIR, compileInfoBound);
     
     compileDependencies(mainKey, info);
     

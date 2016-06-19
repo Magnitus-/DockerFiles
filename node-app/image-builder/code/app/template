@@ -1,6 +1,7 @@
 FROM {{SOURCE}}
 
 ENV UID="{{UID}}"
+{{NPM_COMMAND}}
 
 {{COPY_ALL}}
 

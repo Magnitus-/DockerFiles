@@ -19,6 +19,8 @@ output = output.replace(/{{SOURCE}}/, source_image);
 //Plug values in template
 output = output.replace(/{{UID}}/, process.env.UID);
 
+output = process.env.NPM_COMMAND ? output.replace(/{{NPM_COMMAND}}/, "ENV NPM_COMMAND "+process.env.NPM_COMMAND) : output.replace(/{{NPM_COMMAND}}/, "");
+
 var wgetFilesCmd =  wgetDirCmd(process.env.APP_DIR, "${APP_DIR}", process.env.APP_DIR, "RUN ");
 
 try
