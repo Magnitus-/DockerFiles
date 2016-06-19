@@ -16,4 +16,8 @@ fi
 chown -R ${UID}:${UID} /home/node-app;
 chown -R ${UID}:${UID} ${SHARED_DIR};
 
-(cd ${APP_DIR}; su -c "npm start" node-app);
+if [ -z "$NPM_COMMAND" ]; then
+    NPM_COMMAND="start";
+fi
+
+(cd ${APP_DIR}; su -c "npm run ${NPM_COMMAND}" node-app);

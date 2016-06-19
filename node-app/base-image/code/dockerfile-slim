@@ -3,6 +3,7 @@ FROM node:4-slim
 ENV HOME_DIR /home/node-app
 ENV SHARED_DIR ${HOME_DIR}/shared_modules
 ENV APP_DIR ${HOME_DIR}/app
+ENV NPM_COMMAND start
 
 COPY ["finalize.sh", "/usr/local/bin/"]
 COPY ["resolve_dependencies.js", "/opt/app-setup/"]
@@ -15,4 +16,4 @@ RUN (cd /opt/app-setup; npm install bluebird; npm install module-linker; npm ins
 WORKDIR ${APP_DIR}
 
 ENTRYPOINT ["dumb-init"]
-CMD ["npm", "start"]
+CMD ["sh", "-c", "npm run ${NPM_COMMAND}"]
