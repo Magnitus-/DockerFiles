@@ -19,7 +19,7 @@ if(process.env.NPM_MODULES)
     
 }
 
-Promise.all([recursiveInstaller([process.env.APP_DIR, process.env.SHARED_DIR], '--production'),
+Promise.all([recursiveInstaller([process.env.APP_DIR, process.env.SHARED_DIR], '--production', 1024 * 1024 * 5),
              moduleLinker([process.env.APP_DIR, process.env.SHARED_DIR], [process.env.SHARED_DIR])]).catch((err) => {
     console.log(err);
 })
