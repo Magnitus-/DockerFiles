@@ -1,0 +1,10 @@
+app:
+  container_name: react-compiler-example
+  build: .
+  environment:
+    - BUILD_FILE=/opt/build.json
+  volumes:
+    - ./build.json:/opt/build.json
+    - ./app/javascript:/opt/app/javascript
+    - /lib:/opt/lib
+    - ./app/dist:/opt/dist

@@ -1,0 +1,22 @@
+{
+  "name": "react-build",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Eric Vallee <eric_vallee@webificservices.com>",
+  "licenses": [
+    {
+      "type": "MIT License",
+      "url": "http://mit-license.org/"
+    }
+  ],
+  "dependencies": {
+      "watchify": "3.x",
+      "browserify": "13.x",
+      "babelify": "7.x",
+      "gulp": "3.x"
+  },
+  "license": "MIT",
+  "scripts": {
+      "start": "node index.js"
+  }
+}
