@@ -4,4 +4,5 @@ const babelify = require('babelify');
 const watchify = require('watchify');
 const fs = require('fs');
 
-const settings = fs.
+const settings = JSON.parse(fs.readFileSync(process.env.BUILD_FILE, 'utf8'));
+console.log(settings);

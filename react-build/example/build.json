@@ -1,9 +1,7 @@
 {
     "version": 1,
     "modules": {
-        "pot": "/opt/lib/pot.js",
-        "draw": "/opt/lib/draw.js",
-        "participants": "/opt/lib/participants.js",
+        "*": ["/opt/lib/*"],
         "app": "/opt/app/javascript/app.jsx",
         "header": "/opt/app/javascript/header.jsx",
         "register-section": "/opt//app/javascript/register-section.jsx",
@@ -11,6 +9,7 @@
         "registration-feedback": "/opt/app/javascript/registration-feedback.jsx",
         "draw-feedback": "/opt/app/javascript/draw-feedback.jsx"
     },
+    "watch": true,
     "dependencies": ["react", "react-dom"],
     "destination": "/opt/dist/bundle.js"
 }
