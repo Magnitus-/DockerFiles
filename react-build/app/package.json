@@ -13,7 +13,9 @@
       "watchify": "3.x",
       "browserify": "13.x",
       "babelify": "7.x",
-      "gulp": "3.x"
+      "react": "15.x",
+      "react-dom": "15.x",
+      "redux": "3.x"
   },
   "license": "MIT",
   "scripts": {
