@@ -9,6 +9,7 @@
         "registration-feedback": "/opt/app/javascript/registration-feedback.jsx",
         "draw-feedback": "/opt/app/javascript/draw-feedback.jsx"
     },
+    "extensions": ["js", "jsx"],
     "watch": true,
     "dependencies": ["react", "react-dom"],
     "destination": "/opt/dist/bundle.js"
