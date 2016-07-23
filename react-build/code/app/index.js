@@ -16,13 +16,13 @@ if(settings.watch)
     b.plugin(watchify);
 }
 
-function recursivelyAdModules(_path)
+function recursivelyAddModules(_path)
 {
     if(fs.lstatSync(_path).isDirectory())
     {
         var files = fs.readdirSync(_path);
         files.forEach((file) => {
-            recursivelyAdModules(path.join(_path, file));
+            recursivelyAddModules(path.join(_path, file));
         });
     }
     else
@@ -34,18 +34,46 @@ function recursivelyAdModules(_path)
     }
 }
 
-Object.keys(settings['modules']).forEach((key) => {
-    if(key != '*')
+function recursivelyAddEntrypoints(_path)
+{
+    if(fs.lstatSync(_path).isDirectory())
     {
-        b.require(settings['modules'][key], {'expose': key});
+        var files = fs.readdirSync(_path);
+        files.forEach((file) => {
+            recursivelyAddEntrypoints(path.join(_path, file));
+        });
     }
     else
     {
-        settings['modules'][key].forEach((path) => {
-            recursivelyAdModules(path);
-        });
+        if((!settings.extensions) || settings.extensions.some((extention) => {return ('.'+extention) == path.extname(_path);}))
+        {
+            b.add(_path);
+        }
     }
-});
+}
+
+if(settings.modules)
+{
+    Object.keys(settings['modules']).forEach((key) => {
+        if(key != '*')
+        {
+            b.require(settings['modules'][key], {'expose': key});
+        }
+        else
+        {
+            settings['modules'][key].forEach((path) => {
+                recursivelyAddModules(path);
+            });
+        }
+    });
+}
+
+if(settings.entrypoints &&  settings.entrypoints.length)
+{
+    settings.entrypoints.forEach((entrypoint) => {
+        recursivelyAddEntrypoints(entrypoint);
+    });
+}
 
 if(settings.dependencies && settings.dependencies.length)
 {

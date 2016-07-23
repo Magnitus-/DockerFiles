@@ -9,6 +9,7 @@
         "registration-feedback": "/opt/app/javascript/registration-feedback.jsx",
         "draw-feedback": "/opt/app/javascript/draw-feedback.jsx"
     },
+    "entrypoints": ["/opt/app/javascript/index.jsx"],
     "extensions": ["js", "jsx"],
     "watch": true,
     "dependencies": ["react", "react-dom"],
