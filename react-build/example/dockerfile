@@ -1,7 +1,0 @@
-FROM magnitus/react-compiler:latest
-
-ENV UID="1000"
-
-RUN finalize.sh
-
-USER $UID

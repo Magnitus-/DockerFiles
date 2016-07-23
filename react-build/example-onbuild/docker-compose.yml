@@ -1,9 +1,8 @@
 app:
-  container_name: react-compiler-example
-  image: magnitus/react-compiler:latest-slim
+  container_name: react-compiler-onbuild-example
+  build: .
   environment:
     - BUILD_FILE=/opt/build.json
-    - OUTPUT_UID=1000
   volumes:
     - ./build.json:/opt/build.json
     - ./app/javascript:/opt/app/javascript
