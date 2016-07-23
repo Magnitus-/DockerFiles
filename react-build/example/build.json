@@ -12,6 +12,7 @@
     "entrypoints": ["/opt/app/javascript/index.jsx"],
     "extensions": ["js", "jsx"],
     "watch": true,
+    "minify": true,
     "dependencies": ["react", "react-dom"],
     "destination": "/opt/dist/bundle.js"
 }
