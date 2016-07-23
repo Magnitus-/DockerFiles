@@ -2,7 +2,7 @@
 
 ##Purpose
 
-Images to build single-file react bundles with commonjs sub-modules as well as (optional) es-2015, jsx and file watch support.
+Images to build single-file react bundles with commonjs modules as well as (optional) es-2015, jsx, minification and file watch support. 
 
 Makes use of browserify and babel.
 
@@ -49,5 +49,7 @@ Here are the entries:
 - destination: Path of the final bundled file in the container
 - dependencies: Array of external dependencies you'll use. Possible values are: react, react-dom, redux. Those external dependencies can be required under those names in your code
 - watch: Boolean that sets whether the container should compile your code once or whether it should compile it and re-compile it each time any of the source files are changed
+- minify: Boolean that specifies if the result code should be minifed. If set to true, the code will be minified with uglify.
 - modules: Object having your module names as keys and the path of their corresponding source file as values. The '*' entry is a special entry. It's an array of folders containing files which should also be bundled and whose module name is their file name, without the extension.
-- extensions: Array of file extensions that should be included in folders listed in the '*' entry. If this property is not defined, all files will be processed, no matter the extension.
+- entrypoints: List of files (or folders containing the files) that should be executed directly when the bundled file is loaded (module code only executes when first required) 
+- extensions: Array of file extensions that should be included during folder traversals. If this property is not defined, all files will be processed in entries specifying folders, no matter the extension.
