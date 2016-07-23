@@ -1,6 +1,7 @@
 const browserify = require('browserify');
 const babelify = require('babelify');
 const watchify = require('watchify');
+const uglifyify = require('uglifyify');
 const fs = require('fs');
 const path = require('path');
 
@@ -14,6 +15,11 @@ var b = browserify().transform(babelify, {presets: [es2015, jsx]});
 if(settings.watch)
 {
     b.plugin(watchify);
+}
+
+if(settings.minify)
+{
+    b.transform(uglifyify);
 }
 
 function recursivelyAddModules(_path)
