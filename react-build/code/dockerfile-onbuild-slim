@@ -1,0 +1,3 @@
+FROM magnitus/node-app:4-slim
+
+COPY "app/*" ${APP_DIR}/

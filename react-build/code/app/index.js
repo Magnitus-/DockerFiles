@@ -68,6 +68,10 @@ if(settings.dependencies && settings.dependencies.length)
 function bundle() 
 {
     b.bundle().pipe(fs.createWriteStream(settings.destination));
+    if(process.env.OUTPUT_UID)
+    {
+        fs.chownSync(settings.destination, Number(process.env.OUTPUT_UID), Number(process.env.OUTPUT_UID));
+    }
 }
 
 if(settings.watch)
