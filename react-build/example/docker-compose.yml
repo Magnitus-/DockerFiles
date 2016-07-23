@@ -6,5 +6,5 @@ app:
   volumes:
     - ./build.json:/opt/build.json
     - ./app/javascript:/opt/app/javascript
-    - /lib:/opt/lib
+    - ./lib:/opt/lib
     - ./app/dist:/opt/dist

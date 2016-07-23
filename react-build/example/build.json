@@ -1,7 +1,7 @@
 {
     "version": 1,
     "modules": {
-        "*": ["/opt/lib/*"],
+        "*": ["/opt/lib"],
         "app": "/opt/app/javascript/app.jsx",
         "header": "/opt/app/javascript/header.jsx",
         "register-section": "/opt//app/javascript/register-section.jsx",

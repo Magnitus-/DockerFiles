@@ -4,11 +4,17 @@ const watchify = require('watchify');
 const fs = require('fs');
 const path = require('path');
 
+var es2015 = require('babel-preset-es2015');
+var jsx = require('babel-preset-react');
+
 const settings = JSON.parse(fs.readFileSync(process.env.BUILD_FILE, 'utf8'));
 
-var b = browserify();
+var b = browserify().transform(babelify, {presets: [es2015, jsx]});
 
-//TODO: Watchify + 2015 & jsx
+if(settings.watch)
+{
+    b.plugin(watchify);
+}
 
 function recursivelyAdModules(_path)
 {
@@ -21,7 +27,7 @@ function recursivelyAdModules(_path)
     }
     else
     {
-        if((!settings.extentions) || settings.extentions.some((extention) => {return (','+extention) == path.extname(_path);}))
+        if((!settings.extensions) || settings.extensions.some((extention) => {return ('.'+extention) == path.extname(_path);}))
         {
             b.require(_path, {'expose': path.basename(_path, path.extname(_path))});
         }
@@ -59,5 +65,17 @@ if(settings.dependencies && settings.dependencies.length)
     });
 }
 
-b.bundle().pipe(fs.createWriteStream(settings.destination));
+function bundle() 
+{
+    b.bundle().pipe(fs.createWriteStream(settings.destination));
+}
+
+if(settings.watch)
+{
+    b.on('update', bundle);
+}
+
+bundle();
+ 
+
 
