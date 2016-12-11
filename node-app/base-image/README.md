@@ -6,6 +6,7 @@ Take the dockerfile-template file (or the dockerfile-template-slim file if your 
 
 - UID Environment Variable: Determines the user and group ID that the node app will run under in the container
 - NPM_COMMAND Environment Variable: Determines the command that will be passed as to "npm run" when the container launches. Defaults to "start".
+- TOOL Environment Variable: Tool that you want to use to install your dependencies, link your shared modules and launch your program. Defaults to "npm". Can be set to "yarn" instead.  
 - app content: This should contain your node application (location of package.json file and app-specific entrypoint and dependencies)
 - shared modules content: 
 

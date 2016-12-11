@@ -20,4 +20,4 @@ if [ -z "$NPM_COMMAND" ]; then
     NPM_COMMAND="start";
 fi
 
-(cd ${APP_DIR}; su -c "npm run ${NPM_COMMAND}" node-app);
+(cd ${APP_DIR}; su -c "${TOOL} run ${NPM_COMMAND}" node-app);
