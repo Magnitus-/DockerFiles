@@ -1,5 +1,5 @@
 app:
-  image: magnitus/node-app:4-dev
+  image: magnitus/node-app:6-dev
   container_name: node-app-dev-example
   environment:
     - UID=1000

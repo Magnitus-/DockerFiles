@@ -2,7 +2,7 @@ app:
   container_name: build-image-example2-slim
   image: magnitus/node-app:image-builder
   environment:
-    - SOURCE_IMAGE=magnitus/node-app:4-slim
+    - SOURCE_IMAGE=magnitus/node-app:6-slim
     - UID=1000
     - OUTPUT_IMAGE=magnitus/node-app:image-builder-example2-slim
     - IGNORE=.+~$$

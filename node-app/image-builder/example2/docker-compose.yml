@@ -3,6 +3,7 @@ app:
   image: magnitus/node-app:image-builder
   environment:
     - UID=1000
+    - SOURCE_IMAGE=magnitus/node-app:6
     - OUTPUT_IMAGE=magnitus/node-app:image-builder-example2
     - IGNORE=.+~$$
     - EXTERNAL_PORT=8080
