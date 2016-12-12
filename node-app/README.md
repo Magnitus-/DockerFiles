@@ -12,13 +12,13 @@ The Project has 4 main images. Read the documentation provided in the directory 
 
 Base image to build node applications. It can be used on its own by manually building a production dockerfile from the provided template.
 
-Tags: 4, latest, 4v{version of the image}, 4-slim
+Tags: 4, latest, 4-slim, 6, 6-slim
 
 ###base-dev-image
 
 Development image, meant to be used for code that changes often in a mapped volume outside the image.
 
-Tags: 4-dev
+Tags: 4-dev, 6-dev
 
 ###dockerfile-builder
 
