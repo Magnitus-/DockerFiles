@@ -1,10 +1,12 @@
-#dockerfile: jEdit
+# dockerfile: jEdit
 
-This is an adaptation of a popular Chrome dockerfile that was needed to make it work on my machine.
+NOTICE: While it worked for a bit, this image has always been flacky for me. I'll work on it as time allows if I find that the image by jessfraz still fails me, but truth be told, a dockerized Chrome has always been more of a nice-to-have expiment than a priority for me.
+
+This is an adaptation of a [popular](https://github.com/jessfraz/dockerfiles/tree/master/chrome) Chrome dockerfile that was needed to make it work on my machine.
 
 I abstracted necessary runtime arguments in a docker-compose file.
 
-#Usage
+# Usage
 
 1) Edit the docker-compose.yml file to convey your particular settings:
 
@@ -16,4 +18,3 @@ I abstracted necessary runtime arguments in a docker-compose file.
 2) Run 'docker-compose up' to launch Chrome
 
 3) Run 'docker-compose rm' to cleanup your environment when done
-

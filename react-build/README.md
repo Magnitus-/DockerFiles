@@ -1,20 +1,26 @@
-#node-app
+# node-app
 
-##Purpose
+## Notice
 
-Images to build single-file react bundles with commonjs modules as well as (optional) es-2015, jsx, minification and file watch support. 
+While functional, the tooling for this image, with browserify, is dated by 2017 standards. Most frontend projects would now use es6 modules with webpack.
+
+As I'm now in a more backend phase of my workflow, I'll revisit this image when the need for it is felt.
+
+## Purpose
+
+Images to build single-file react bundles with commonjs modules as well as (optional) es-2015, jsx, minification and file watch support.
 
 Makes use of browserify and babel.
 
-##Images
+## Images
 
 The are two main images:
 
 - the onbuild image (onbuild tag) that needs to be the parent of a child image, but that has the final image execute with reduced privilege
 - the regular image (latest tag) that can be used directly, but has to run as root
-- Additionally, both images have a slim variant that is based on the slim node image 
+- Additionally, both images have a slim variant that is based on the slim node image
 
-##Usage
+## Usage
 
 ### Environment Variables
 
@@ -51,5 +57,5 @@ Here are the entries:
 - watch: Boolean that sets whether the container should compile your code once or whether it should compile it and re-compile it each time any of the source files are changed
 - minify: Boolean that specifies if the result code should be minifed. If set to true, the code will be minified with uglify.
 - modules: Object having your module names as keys and the path of their corresponding source file as values. The '*' entry is a special entry. It's an array of folders containing files which should also be bundled and whose module name is their file name, without the extension.
-- entrypoints: List of files (or folders containing the files) that should be executed directly when the bundled file is loaded (module code only executes when first required) 
+- entrypoints: List of files (or folders containing the files) that should be executed directly when the bundled file is loaded (module code only executes when first required)
 - extensions: Array of file extensions that should be included during folder traversals. If this property is not defined, all files will be processed in entries specifying folders, no matter the extension.

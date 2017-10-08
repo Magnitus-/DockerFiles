@@ -1,8 +1,10 @@
-#dockerfile: jEdit
+# dockerfile: jEdit
+
+NOTICE: This image is not longer maintained as I no longer use jEdit as my primary editor.
 
 This is a dockerfile for the jEdit text editor.
 
-#Usage
+# Usage
 
 1) Edit the docker-compose.yml file to convey your particular settings:
 
@@ -12,4 +14,3 @@ This is a dockerfile for the jEdit text editor.
 
 2) Run docker-compose up
 3) By differienciating the configuration and placement of the docker-compose.yml file, you can seperate your file editing environments.
-
