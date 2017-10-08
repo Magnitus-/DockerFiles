@@ -1,6 +1,6 @@
-# dockerfile: jEdit
+# Chrome
 
-NOTICE: While it worked for a bit, this image has always been flacky for me. I'll work on it as time allows if I find that the image by jessfraz still fails me, but truth be told, a dockerized Chrome has always been more of a nice-to-have expiment than a priority for me.
+**NOTICE:** While it worked for a bit, this image has always been flacky for me. I'll work on it as time allows if I find that the image by jessfraz still fails me, but truth be told, a dockerized Chrome has always been more of a nice-to-have expiment than a priority for me.
 
 This is an adaptation of a [popular](https://github.com/jessfraz/dockerfiles/tree/master/chrome) Chrome dockerfile that was needed to make it work on my machine.
 

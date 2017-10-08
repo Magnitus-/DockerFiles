@@ -1,6 +1,6 @@
-# dockerfile: jEdit
+# jEdit
 
-NOTICE: This image is not longer maintained as I no longer use jEdit as my primary editor.
+**NOTICE:** This image is not longer maintained as I no longer use jEdit as my primary editor.
 
 This is a dockerfile for the jEdit text editor.
 

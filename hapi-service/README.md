@@ -1,4 +1,4 @@
-#hapi-service
+# hapi-service
 
 Per-container standalone hapi services that can be bolted to an app behind a reverse-proxy.
 

@@ -1,0 +1,24 @@
+version: "3"
+services:
+    self-signed-certificate-generator:
+        build:
+            context: ../
+            dockerfile: Dockerfile
+        image: magnitus/self-signed-certificate-generator
+        environment:
+            COUNTRY: CA
+            STATE: Quebec
+            CITY: Montreal
+            ORGANIZATION: Any
+            DEPARTMENT: IT
+            EMAIL: email@mydomain.com
+            DOMAIN: dev.mydomain.com
+            CERTIFICATE_DURATION: 1095
+            KEY_FILE: ""
+            CSR_FILE: ""
+            CERTIFICATE_FILE: ""
+            KEY_PASSWORD_FILE: "/opt/password.txt"
+            KEY_ENCRYPTION_CYPHER: aes256
+        volumes:
+            - .:/opt/output
+            - ./password.txt:/opt/password.txt

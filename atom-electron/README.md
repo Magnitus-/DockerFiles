@@ -1,6 +1,6 @@
-# dockerfile: atom-electron
+# atom-electron
 
-NOTICE: Dockerizing my text editor, while nice, is not a top priority so this image will be updated on a per-need basis (possibly never). Besides, I've already switched to spyder for my Python workflow. Who knows what editor I'll be using in 3 years for my js/bash/C++/"possible future language" workflow.
+**NOTICE:** Dockerizing my text editor, while nice, is not a top priority so this image will be updated on a per-need basis (possibly never). Besides, I've already switched to spyder for my Python workflow. Who knows what editor I'll be using in 3 years for my js/bash/C++/"possible future language" workflow.
 
 This is a dockerfile to launch an electron gui within a docker container.
 
