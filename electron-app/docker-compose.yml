@@ -1,5 +1,5 @@
 electron:
-    image: magnitus/atom-electron:dev-beta
+    image: magnitus/electron-app:dev-beta
     environment:
         - DISPLAY=$DISPLAY
         - _USER=eric
