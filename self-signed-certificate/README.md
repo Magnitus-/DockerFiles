@@ -26,16 +26,17 @@ The container's behavior can be customized with the following environment variab
 - **ORGANIZATION**: Organization/company the certificate is for
 - **DEPARTMENT**: Department within the organization/company the certificate is for
 - **EMAIL**: Contact email for the certificate
-- **DOMAIN**: Domain the certificate will be valid for
+- **DOMAINS**: Domain(s) the certificate will be valid for. If you specify several domains, you sould separate entries with the **;** character.
 - **CERTIFICATE_DURATION**: Lifetime of the certificate in days before it expires (defaults to 365 if omitted)
 - **OUTPUT_DIR**: Output directory in the container where generated files will be placed (defaults to /opt/output if omitted). It is recommend that this directory be bound to a directory outside the container to access the generated files.
-- **KEY_FILE**: Filename of the generated private key file (defaults to domain.key if omitted). If the value of "" is passed, the file will be named $DOMAIN.key instead, where $DOMAIN is the DOMAIN you specified.
-- **CSR_FILE**: Filename of the generated certificate signing request file (defaults to domain.csr if omitted). If the value of "" is passed, the file will be named $DOMAIN.csr instead, where $DOMAIN is the DOMAIN you specified.
-- **CERTIFICATE_FILE**: Filename of the generated certificate file (defaults to domain.crt if omitted). If the value of "" is passed, the file will be named $DOMAIN.crt instead, where $DOMAIN is the DOMAIN you specified.
+- **KEY_FILE**: Filename of the generated private key file (defaults to domain.key if omitted). If the value of "" is passed, the file will be named ```DOMAIN[0].key``` instead, where ```DOMAIN[0]``` is the first entry in the domain list you specified.
+- **CSR_FILE**: Filename of the generated certificate signing request file (defaults to domain.csr if omitted). If the value of "" is passed, the file will be named ```DOMAINS[0].csr``` instead, where ```DOMAINS[0]``` is the first entry in the domain list you specified.
+- **CERTIFICATE_FILE**: Filename of the generated certificate file (defaults to domain.crt if omitted). If the value of "" is passed, the file will be named ```DOMAIN[0].crt``` instead, is the first entry in the domain list you specified.
 - **KEY_PASSWORD**: If you want to encrypt the generated private key file, specify a password to use for the encryption (note that any utility accessing the private key file will need to use this password). Note that you'll also have to specify an encryption cypher via the "KEY_ENCRYPTION_CYPHER" environment variable.
 - **KEY_PASSWORD_FILE**: Similar to the key "KEY_PASSWORD" environment variable above, except that you are specifying the file where the password is to be found instead (useful if you want to use a secret to store the password). Note that this needs to be the entire path of the file, not just the filename. Like the "KEY_PASSWORD" environment variable, you'll have to specify an encryption cypher as well.
 - **KEY_ENCRYPTION_CYPHER**: Encryption cypher used to encrypt the private key file with your password. Google "openssl genrsa cyphers" for a list of valid cyphers. At the time of this writing, I see the following cyphers in the documentation: aes128, aes192, aes256, camellia128, camellia192, camellia256, des, des3, idea
 - **KEY_BITS**: Size of the generated private key in bits (defaults to 2048 if omitted)
+- **OUTPUT_CERTIFICATE_INFO**: Will output the generated certificate info if set to "true"
 
 ## example
 

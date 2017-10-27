@@ -4,7 +4,7 @@ services:
         build:
             context: ../
             dockerfile: Dockerfile
-        image: magnitus/self-signed-certificate-generator
+        image: magnitus/self-signed-certificate-generator:latest
         environment:
             COUNTRY: CA
             STATE: Quebec
@@ -12,7 +12,7 @@ services:
             ORGANIZATION: Any
             DEPARTMENT: IT
             EMAIL: email@mydomain.com
-            DOMAIN: dev.mydomain.com
+            DOMAINS: dev.mydomain.com
             CERTIFICATE_DURATION: 1095
             KEY_FILE: ""
             CSR_FILE: ""

@@ -7,8 +7,8 @@ ENV OUTPUT_DIR /opt/output
 ENV KEY_BITS 2048
 ENV CERTIFICATE_DURATION 365
 
-RUN apt-get update && apt-get install -y openssl
+RUN apt-get update && apt-get install -y openssl && apt-get install -y python
 
-COPY generateCertificate.sh /opt/scripts/
+COPY generateCertificate.py /opt/scripts/
 
-CMD ["/opt/scripts/generateCertificate.sh"]
+CMD ["python", "/opt/scripts/generateCertificate.py"]
