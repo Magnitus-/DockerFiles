@@ -1,6 +1,8 @@
 import os
 import subprocess
 
+TEMP_CONFIG_FILE=os.environ.get("TEMP_CONFIG_FILE", "/var/tmp/openssl.cnf")
+
 def getEnv():
     env = {}
     env['domains'] = os.environ.get('DOMAINS').split(';')
@@ -13,10 +15,7 @@ def getEnv():
         env['password'] = 'file:' + os.environ.get('KEY_PASSWORD_FILE')
     else:
         env['password'] = None
-    env['san'] = ''
-    for index, domain in enumerate(env['domains'], 0):
-        coma = '' if index == 0 else ','
-        env['san'] = env['san'] + 'DNS:' + domain + coma
+    env['san'] = ",".join(["DNS:" + domain for domain in env['domains']])
     env['subj'] = "/C={COUNTRY}/ST={STATE}/L={CITY}/O={ORGANIZATION}/OU={DEPARTMENT}/CN={DOMAIN}/emailAddress={EMAIL}".format(**{
         'COUNTRY': os.environ.get('COUNTRY'),
         'STATE': os.environ.get('STATE'),
@@ -46,7 +45,7 @@ def getCmds(env):
                                 "-subj", env['subj'],
                                 "-reqexts", "SAN",
                                 "-extensions", "SAN",
-                                "-config", "<(cat /etc/ssl/openssl.cnf <(printf \"\\n[SAN]\\nsubjectAltName=" + env['san'] + "\"))",
+                                "-config", TEMP_CONFIG_FILE,
                                 "-passin", env['password']]
         cmds['generate_crt'] = ["openssl", "x509",
                                 "-signkey", env['key_file'],
@@ -61,10 +60,10 @@ def getCmds(env):
         cmds['generate_csr'] = ["openssl", "req", "-new",
                                 "-key", env['key_file'],
                                 "-out", env['csr_file'],
-                                "-subj", env['subj'],
+                                "-subj", "\"" + env['subj'] + "\"",
                                 "-extensions", "SAN",
                                 "-reqexts", "SAN",
-                                "-config", "<(cat /etc/ssl/openssl.cnf <(printf \"\\n[SAN]\\nsubjectAltName=" + env['san'] + "\"))"]
+                                "-config", TEMP_CONFIG_FILE]
         cmds['generate_crt'] = ["openssl", "x509",
                                 "-signkey", env['key_file'],
                                 "-in", env['csr_file'],
@@ -79,15 +78,16 @@ def getCmds(env):
 
 if __name__ == "__main__":
     env = getEnv()
-    print env
     cmds = getCmds(env)
-    print cmds
     if not os.path.isfile(env['key_file']):
-        print "one"
         print subprocess.check_output(" ".join(cmds['generate_key']), shell=True)
 
     if not os.path.isfile(env['csr_file']):
-        print "two"
+        with open("/etc/ssl/openssl.cnf", "r") as config_file:
+            with open(TEMP_CONFIG_FILE, "w") as temp_config_file:
+                config_content = config_file.read()
+                temp_config_file.write(config_content + "\n[SAN]\nsubjectAltName=\"" + env['san'] + "\"")
+
         print subprocess.check_output(" ".join(cmds['generate_csr']), shell=True)
 
     subprocess.check_output(" ".join(cmds['generate_crt']), shell=True)

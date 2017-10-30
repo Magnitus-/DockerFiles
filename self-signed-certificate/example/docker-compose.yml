@@ -12,13 +12,14 @@ services:
             ORGANIZATION: Any
             DEPARTMENT: IT
             EMAIL: email@mydomain.com
-            DOMAINS: dev.mydomain.com
+            DOMAINS: dev.mydomain.com;test.mydomain.com
             CERTIFICATE_DURATION: 1095
             KEY_FILE: ""
             CSR_FILE: ""
             CERTIFICATE_FILE: ""
             KEY_PASSWORD_FILE: "/opt/password.txt"
             KEY_ENCRYPTION_CYPHER: aes256
+            OUTPUT_CERTIFICATE_INFO: "true"
         volumes:
             - .:/opt/output
             - ./password.txt:/opt/password.txt
