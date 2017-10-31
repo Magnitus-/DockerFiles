@@ -1,7 +1,8 @@
 import os
 import subprocess
 
-TEMP_CONFIG_FILE=os.environ.get("TEMP_CONFIG_FILE", "/var/tmp/openssl.cnf")
+TEMP_CONFIG_FILE = os.environ.get("TEMP_CONFIG_FILE", "/var/tmp/openssl.cnf")
+TEMP_SAN_FILE = os.environ.get("TEMP_SAN_FILE", "/var/tmp/san.cnf")
 
 def getEnv():
     env = {}
@@ -52,7 +53,8 @@ def getCmds(env):
                                 "-in", env['csr_file'],
                                 "-req", "-days", env['certificate_duration'],
                                 "-out", env['certificate_file'],
-                                "-passin", env['password']]
+                                "-passin", env['password'],
+                                "-extfile", TEMP_SAN_FILE]
     else:
         cmds['generate_key'] = ["openssl", "genrsa",
                                 "-out", env['key_file'],
@@ -68,7 +70,8 @@ def getCmds(env):
                                 "-signkey", env['key_file'],
                                 "-in", env['csr_file'],
                                 "-req", "-days", env['certificate_duration'],
-                                "-out", env['certificate_file']]
+                                "-out", env['certificate_file'],
+                                "-extfile", TEMP_SAN_FILE]
 
     cmds['view_crt'] = ["openssl", "x509",
                         "-in", env['certificate_file'],
@@ -86,10 +89,12 @@ if __name__ == "__main__":
         with open("/etc/ssl/openssl.cnf", "r") as config_file:
             with open(TEMP_CONFIG_FILE, "w") as temp_config_file:
                 config_content = config_file.read()
-                temp_config_file.write(config_content + "\n[SAN]\nsubjectAltName=\"" + env['san'] + "\"")
+                temp_config_file.write(config_content.replace("# copy_extensions = copy", "copy_extensions = copy") + "\n[SAN]\nsubjectAltName=\"" + env['san'] + "\"")
 
         print subprocess.check_output(" ".join(cmds['generate_csr']), shell=True)
 
+    with open(TEMP_SAN_FILE, "w") as temp_san_file:
+        temp_san_file.write("subjectAltName=" + env['san'])
     subprocess.check_output(" ".join(cmds['generate_crt']), shell=True)
 
     if env['output_certificate_info']:
