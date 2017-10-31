@@ -41,3 +41,11 @@ The container's behavior can be customized with the following environment variab
 ## example
 
 See the **example** directory for a properly configured docker-compose file that you can play with. You can execute it by running ```docker-compose up``` in the example directory.
+
+## Versioning
+
+I don't foresee that much changes (changes will be driven by the evolution of my needs for self-signed certificates which aren't much) so this topic may be moot...
+
+Stable versions are labeled ```v<NO>``` where ```NO``` is a version number and any update within the same version number will remain backward compatible.
+
+The **latest** tag may change in a way that breaks the previous release, so if you need something reliable, I recommend sticking with a particular version and not the **latest** tag.
