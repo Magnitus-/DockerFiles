@@ -95,7 +95,7 @@ if __name__ == "__main__":
 
     with open(TEMP_SAN_FILE, "w") as temp_san_file:
         temp_san_file.write("subjectAltName=" + env['san'])
-    subprocess.check_output(" ".join(cmds['generate_crt']), shell=True)
+    print subprocess.check_output(" ".join(cmds['generate_crt']), shell=True)
 
     if env['output_certificate_info']:
         print subprocess.check_output(" ".join(cmds['view_crt']), shell=True)
