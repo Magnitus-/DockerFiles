@@ -34,7 +34,7 @@ def getEnv():
 
 def getCmds(env):
     cmds = {}
-    if env['password'] == None:
+    if env['password'] != None:
         cmds['generate_key'] = ["openssl", "genrsa",
                                 "-out", env['key_file'],
                                 "-" + env['key_encryption_cypher'],
