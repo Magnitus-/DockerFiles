@@ -37,7 +37,7 @@ def getEnv():
 
     for fileType in ['key_file', 'csr_file', 'certificate_file']:
         envVar = fileTypes[fileType]['environment_variable']
-        ext = fileTypes[fileType]['environment_variable']
+        ext = fileTypes[fileType]['extension']
         if os.environ.get(envVar) == None:
             env[fileType] = 'domain' + ext
         else:

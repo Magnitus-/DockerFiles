@@ -20,4 +20,3 @@ services:
             OUTPUT_CERTIFICATE_INFO: "true"
         volumes:
             - .:/opt/output
-            - ./password.txt:/opt/password.txt
