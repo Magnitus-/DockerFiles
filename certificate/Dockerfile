@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:stretch
 
 ENV KEY_FILE domain.key
 ENV CSR_FILE domain.csr
