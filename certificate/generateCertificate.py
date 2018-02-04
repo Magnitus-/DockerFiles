@@ -46,7 +46,7 @@ def getEnv():
 
     env['password'] = getPassword('KEY')
 
-    if os.environ.get('CA_KEY_FILE') !== None:
+    if os.environ.get('CA_KEY_FILE') != None:
         env['ca_key_file'] = os.environ.get('CA_KEY_FILE')
         env['ca_certificate_file'] = os.environ.get('CA_CERTIFICATE_FILE')
         env['ca_password'] = getPassword('CA_KEY')
