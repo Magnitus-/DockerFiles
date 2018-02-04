@@ -109,7 +109,7 @@ def getGenerateCrtCmd(env):
 
     if env['ca_key_file'] != None:
         generateCrtCmd += ["-CA", env['ca_certificate_file'],
-                           "-CAKey", env['ca_key_file']]
+                           "-CAkey", env['ca_key_file']]
         if env['ca_password'] != None:
             generateCrtCmd += ["-passin", env['ca_password']]
 
