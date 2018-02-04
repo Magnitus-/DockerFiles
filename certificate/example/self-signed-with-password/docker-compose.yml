@@ -4,7 +4,7 @@ services:
         build:
             context: ../
             dockerfile: Dockerfile
-        image: magnitus/self-signed-certificate-generator:latest
+        image: magnitus/certificate-generator:latest
         environment:
             COUNTRY: CA
             STATE: Quebec
