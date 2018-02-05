@@ -66,7 +66,13 @@ docker-compse up certificate-generator
 
 ## tests
 
-...
+From the test directory, type:
+
+```
+python run.py
+```
+
+At the moment, only the scenario of a ca signed certificates with password protected keys is tested, but it is the most complicated scenario supported by the image and the test will fail if the core functionality of self-signed certificates don't also work (since the ca certificate generated for the test is a self-signed certificate).
 
 ## Versioning
 
