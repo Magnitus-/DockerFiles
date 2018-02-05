@@ -1,0 +1,52 @@
+version: "3"
+services:
+    ca-certificate-generator:
+        build:
+            context: ../
+            dockerfile: Dockerfile
+        image: magnitus/certificate-generator:latest
+        environment:
+            COUNTRY: CA
+            STATE: Quebec
+            CITY: Montreal
+            ORGANIZATION: Any
+            DEPARTMENT: IT
+            EMAIL: email@cadomain.com
+            DOMAINS: dev.cadomain.com;test.cadomain.com
+            CERTIFICATE_DURATION: 1095
+            KEY_FILE: "ca.key"
+            CSR_FILE: "ca.csr"
+            CERTIFICATE_FILE: "ca.crt"
+            OUTPUT_CERTIFICATE_INFO: "true"
+            KEY_PASSWORD_FILE: "/opt/ca-password.txt"
+            KEY_ENCRYPTION_CYPHER: aes256
+        volumes:
+            - .:/opt/output
+            - ./ca-password.txt:/opt/ca-password.txt
+    certificate-generator:
+        build:
+            context: ../
+            dockerfile: Dockerfile
+        image: magnitus/certificate-generator:latest
+        environment:
+            COUNTRY: CA
+            STATE: Quebec
+            CITY: Montreal
+            ORGANIZATION: Any
+            DEPARTMENT: IT
+            EMAIL: email@mydomain.com
+            DOMAINS: dev.mydomain.com;test.mydomain.com
+            CERTIFICATE_DURATION: 1095
+            KEY_FILE: "certificate.key"
+            CSR_FILE: "certificate.csr"
+            CERTIFICATE_FILE: "certificate.crt"
+            CA_KEY_FILE: "/opt/output/ca.key"
+            CA_CERTIFICATE_FILE: "/opt/output/ca.crt"
+            OUTPUT_CERTIFICATE_INFO: "true"
+            KEY_PASSWORD_FILE: "/opt/password.txt"
+            KEY_ENCRYPTION_CYPHER: aes256
+            CA_KEY_PASSWORD_FILE: "/opt/ca-password.txt"
+        volumes:
+            - .:/opt/output
+            - ./password.txt:/opt/password.txt
+            - ./ca-password.txt:/opt/ca-password.txt
