@@ -45,7 +45,24 @@ The container's behavior can be customized with the following environment variab
 
 ## Examples
 
-...
+There are 4 examples for running the image covering the following cases:
+- Generating a self-signed certificate
+- Generating a self-signed certificate with its private key protected by a password
+- Generating a CA signed certificate
+- Generating a CA signed certificate with both private keys protected by a password
+
+For the self-signed certificate examples, go in the example directory and run:
+
+```
+docker-compse up
+```
+
+For the CA signed certificate examples, go in the example directory and run:
+
+```
+docker-compse up ca-certificate-generator
+docker-compse up certificate-generator
+```
 
 ## tests
 
