@@ -1,9 +1,6 @@
 version: "3"
 services:
     ca-certificate-generator:
-        build:
-            context: ../
-            dockerfile: Dockerfile
         image: magnitus/certificate-generator:latest
         environment:
             COUNTRY: CA
@@ -21,9 +18,6 @@ services:
         volumes:
             - .:/opt/output
     certificate-generator:
-        build:
-            context: ../
-            dockerfile: Dockerfile
         image: magnitus/certificate-generator:latest
         environment:
             COUNTRY: CA
