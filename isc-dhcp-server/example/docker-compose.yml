@@ -1,0 +1,10 @@
+version: "3"
+services:
+    dhcp-server:
+        image: magnitus/isc-dhcp-server:latest
+        restart: always
+        network_mode: host
+        environment:
+            INTERFACE: eth0
+        volumes:
+            - ./dhcpd.conf:/opt/dhcp/dhcpd.conf
