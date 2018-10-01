@@ -1,0 +1,15 @@
+$TTL {{ ttl.default }}
+$ORIGIN {{ domain }}.
+@ IN SOA nameserver.{{ domain }}. email.{{ domain }}. (
+    20180925;
+    7200;
+    3600;
+    1209600;
+    3600;
+
+)
+IN NS nameserver.{{ domain }}.
+nameserver {{ ttl.default }} IN A {{ ip }}
+{% for static_host in network.static_hosts %}
+{{ static_host.name }} {{ ttl.short }} IN A {{ static_host.ip }}
+{% endfor %}

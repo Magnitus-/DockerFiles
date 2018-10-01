@@ -1,0 +1,11 @@
+{% for network in networks %}
+{{ network.domain }} {
+    file /etc/network-setup/zonefile.{{ network.domain }}
+    log
+}
+{% endfor %}
+
+. {
+    forward . {{ fallback_dns_server }}
+    log
+}

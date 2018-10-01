@@ -1,0 +1,8 @@
+version: '3'
+services:
+  setup:
+    build: ./image
+    volumes:
+      - "./conf:/opt/conf"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/etc/network-setup"

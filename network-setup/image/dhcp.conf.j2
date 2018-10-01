@@ -1,0 +1,18 @@
+default-lease-time {{ lease_time.default }};
+max-lease-time {{ lease_time.max }};
+
+subnet {{ network.subnet }} netmask {{ network.mask }} {
+    option routers                  {{ network.router }};
+    option broadcast-address        {{ network.broadcast }};
+    option subnet-mask              {{ network.mask }};
+    option domain-name-servers      {{ network.dns_ip }};
+	range {{ network.range }};
+}
+
+{% for static_host in network.static_hosts %}
+host {{ static_host.name }} {
+   option host-name "{{ static_host.name }}";
+   hardware ethernet {{ static_host.mac }};
+   fixed-address {{ static_host.ip }};
+}
+{% endfor %}

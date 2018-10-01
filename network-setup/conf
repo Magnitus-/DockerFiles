@@ -1,0 +1,31 @@
+fallback_dns_server: 8.8.8.8
+networks:
+  test:
+    subnet: 192.168.10.0
+    mask: 255.255.255.0
+    range: "192.168.10.100 192.168.10.254" 
+    router: 192.168.10.1
+    broadcast: 192.168.10.255
+    interface: eth0
+    static_hosts:
+    - mac: 00:00:00:00:00:00
+      ip: 192.168.10.3
+      name: dummy_one
+    - mac: 11:11:11:11:11:11
+      ip: 192.168.11.4
+      name: dummy_two
+
+  admin:
+    subnet: 192.168.11.0
+    mask: 255.255.255.0
+    range: "192.168.11.100 192.168.11.254" 
+    router: 192.168.11.1
+    broadcast: 192.168.11.255
+    interface: eth1
+    static_hosts:
+    - mac: 00:00:00:00:00:00
+      ip: 192.168.11.2
+      name: dummy_one
+    - mac: 11:11:11:11:11:11
+      ip: 192.168.11.3
+      name: dummy_two
