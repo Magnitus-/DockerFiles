@@ -5,7 +5,7 @@ subnet {{ network.subnet }} netmask {{ network.mask }} {
     option routers                  {{ network.router }};
     option broadcast-address        {{ network.broadcast }};
     option subnet-mask              {{ network.mask }};
-    option domain-name-servers      {{ network.dns_ip }};
+    option domain-name-servers      {{ ip }};
 	range {{ network.range }};
 }
 

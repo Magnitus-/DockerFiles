@@ -2,6 +2,8 @@
 
 import os
 import datetime
+import subprocess
+import re
 
 import docker
 from jinja2 import Template
@@ -15,16 +17,32 @@ DNS_TTL = {
     'short': 300
 }
 
+DHCP_LEASE_TIME = {
+    'default': 600,
+    'max': 7200
+}
+
+DHCP_FILENAME_TEMPLATE = 'dhcp.{domain}.conf'
+
 def get_configurations():
     with open('/opt/conf') as config_file:
         return load(config_file)
 
 #Placeholder
-def get_interfaces_ip_maps():
-    return {
-        'eth0': '192.168.10.2',
-        'eth1': '192.168.11.1'
-    }
+route_ip_regex = re.compile('src[ ](?P<ip>[0-9]+[.][0-9]+[.][0-9]+[.][0-9]+)[ ]')
+def get_interfaces_ip_maps(configurations):
+    interfaces_ip_maps = {}
+    route_outputs = subprocess.run(["ip", "route"], capture_output=True).stdout.decode('utf-8').strip().split('\n')
+
+    for name in configurations['networks']:
+        interface = configurations['networks'][name]['interface']
+        for route_output in route_outputs:
+            if not route_output.startswith('default via') and 'dev {interface}'.format(interface=interface) in route_output:
+                match = route_ip_regex.search(route_output)
+                if match is not None:
+                    interfaces_ip_maps[interface] = match.group('ip')
+
+    return interfaces_ip_maps
 
 def generate_dns_config(configurations):
     with open(os.path.join(TEMPLATES_DIRECTORY, 'dns.conf.j2'), 'r') as template_file:
@@ -51,15 +69,28 @@ def generate_dns_zonefiles(configurations, interfaces_ip_maps):
                 )
                 zonefile.write(content)
 
-def generate_dhcp_config(configurations):
-    pass
+def generate_dhcp_config(configurations, interfaces_ip_maps):
+    with open(os.path.join(TEMPLATES_DIRECTORY, 'dhcp.conf.j2'), 'r') as template_file:
+        template = Template(template_file.read())
+        for name in configurations['networks']:
+            network = configurations['networks'][name]
+            filename = DHCP_FILENAME_TEMPLATE.format(domain=name)
+            with open(os.path.join(CONFIG_DIRECTORY, filename), 'w+') as configuration_file:
+                content = template.render(
+                    ip=interfaces_ip_maps[network['interface']],
+                    lease_time=DHCP_LEASE_TIME,
+                    network=network
+                )
+                configuration_file.write(content)
 
 def launch_services(configurations):
     pass
 
+
 if __name__ == "__main__":
     configurations = get_configurations()
+    interfaces_ip_maps = get_interfaces_ip_maps(configurations)
     generate_dns_config(configurations)
-    generate_dns_zonefiles(configurations, get_interfaces_ip_maps())
-    generate_dhcp_config(configurations)
+    generate_dns_zonefiles(configurations, interfaces_ip_maps)
+    generate_dhcp_config(configurations, interfaces_ip_maps)
     launch_services(configurations)
