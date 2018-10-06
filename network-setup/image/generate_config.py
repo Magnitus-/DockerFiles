@@ -2,7 +2,6 @@
 
 import os
 import datetime
-import subprocess
 import re
 
 import docker
@@ -11,6 +10,14 @@ from yaml import load
 
 TEMPLATES_DIRECTORY = os.environ['TEMPLATE_DIRECTORY']
 CONFIG_DIRECTORY = os.environ['CONFIG_DIRECTORY']
+
+SERVICE_NAMES = {
+    'dns': os.environ.get('DNS_SERVICE_NAME', 'dns'),
+    'dhcp': os.environ.get('DHCP_SERVICE_NAME', '{domain}-dhcp')
+}
+
+DNS_IMAGE = os.environ.get('DNS_IMAGE')
+DHCP_IMAGE = os.environ.get('DHCP_IMAGE')
 
 DNS_TTL = {
     'default': 86400,
@@ -24,6 +31,7 @@ DHCP_LEASE_TIME = {
 
 DHCP_FILENAME_TEMPLATE = 'dhcp.{domain}.conf'
 
+
 def get_configurations():
     with open('/opt/conf') as config_file:
         return load(config_file)
@@ -32,7 +40,13 @@ def get_configurations():
 route_ip_regex = re.compile('src[ ](?P<ip>[0-9]+[.][0-9]+[.][0-9]+[.][0-9]+)[ ]')
 def get_interfaces_ip_maps(configurations):
     interfaces_ip_maps = {}
-    route_outputs = subprocess.run(["ip", "route"], capture_output=True).stdout.decode('utf-8').strip().split('\n')
+    client = docker.from_env()
+    route_outputs = client.containers.run(
+        "network-setup_setup:latest", 
+        "ip route",
+        network_mode="host",
+        remove=True
+    ).decode('utf-8').strip().split('\n')
 
     for name in configurations['networks']:
         interface = configurations['networks'][name]['interface']
@@ -83,8 +97,24 @@ def generate_dhcp_config(configurations, interfaces_ip_maps):
                 )
                 configuration_file.write(content)
 
-def launch_services(configurations):
-    pass
+def get_container_id():
+    with open('/etc/hostname', 'r') as hostfile:
+        return hostfile.read().strip()
+
+
+def launch_services(configurations, container_id):
+    client = docker.from_env()
+    client.containers.run(
+        DNS_IMAGE, 
+        "-conf {conf}".format(conf=os.path.join(CONFIG_DIRECTORY, 'dns.conf')),
+        name="dns-server",
+        network_mode="host",
+        volumes_from=container_id,
+        restart_policy={'name': 'always'},
+        detach=True
+    )
+    for name in configurations['networks']:
+        pass
 
 
 if __name__ == "__main__":
@@ -93,4 +123,4 @@ if __name__ == "__main__":
     generate_dns_config(configurations)
     generate_dns_zonefiles(configurations, interfaces_ip_maps)
     generate_dhcp_config(configurations, interfaces_ip_maps)
-    launch_services(configurations)
+    launch_services(configurations, get_container_id())

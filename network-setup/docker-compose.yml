@@ -5,4 +5,7 @@ services:
     volumes:
       - "./conf:/opt/conf"
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "/etc/network-setup"
+      - "network-config:/etc/network-setup"
+
+volumes:
+  network-config:
