@@ -2,7 +2,9 @@ default-lease-time {{ lease_time.default }};
 max-lease-time {{ lease_time.max }};
 
 subnet {{ network.subnet }} netmask {{ network.mask }} {
+    {% if network.router %}
     option routers                  {{ network.router }};
+    {% endif %}
     option broadcast-address        {{ network.broadcast }};
     option subnet-mask              {{ network.mask }};
     option domain-name-servers      {{ ip }};

@@ -36,13 +36,12 @@ def get_configurations():
     with open('/opt/conf') as config_file:
         return load(config_file)
 
-#Placeholder
 route_ip_regex = re.compile('src[ ](?P<ip>[0-9]+[.][0-9]+[.][0-9]+[.][0-9]+)[ ]')
 def get_interfaces_ip_maps(configurations):
     interfaces_ip_maps = {}
     client = docker.from_env()
     route_outputs = client.containers.run(
-        "network-setup_setup:latest", 
+        "magnitus/network-setup_setup:latest", 
         "ip route",
         network_mode="host",
         remove=True
@@ -114,7 +113,19 @@ def launch_services(configurations, container_id):
         detach=True
     )
     for name in configurations['networks']:
-        pass
+        network = configurations['networks'][name]
+        client.containers.run(
+            DHCP_IMAGE, 
+            name="dhcp-{domain}-server".format(domain=name),
+            network_mode="host",
+            volumes_from=container_id,
+            restart_policy={'name': 'always'},
+            detach=True,
+            environment={
+                "CONF_PATH": os.path.join(CONFIG_DIRECTORY, DHCP_FILENAME_TEMPLATE.format(domain=name)),
+                "INTERFACE": network['interface']
+            }
+        )
 
 
 if __name__ == "__main__":
