@@ -19,6 +19,6 @@ There is an example complete with a sample configuration and docker-compose file
 
 # Manual Push for Arm64
 
-The image comes (or will come when I get around to pushing the arm64 version in the upcoming days) in both amd64 and arm64 flavors.
+The image comes in both amd64 and arm64 flavors.
 
 However, to the best of my knowledge, docker hub doesn't have a builder for arm64 images currently so the arm64 version has to be pushed manually.
