@@ -41,7 +41,7 @@ def get_interfaces_ip_maps(configurations):
     interfaces_ip_maps = {}
     client = docker.from_env()
     route_outputs = client.containers.run(
-        "magnitus/network-setup_setup:latest", 
+        "magnitus/network-setup:latest", 
         "ip route",
         network_mode="host",
         remove=True
