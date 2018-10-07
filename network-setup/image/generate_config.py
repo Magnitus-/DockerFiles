@@ -100,9 +100,18 @@ def get_container_id():
     with open('/etc/hostname', 'r') as hostfile:
         return hostfile.read().strip()
 
+def clear_container_if_exists(name):
+    client = docker.from_env()
+    containers = client.containers.list(filters={'name': name})
+    if len(containers) > 0:
+        container = containers[0]
+        container.stop()
+        container.remove()
+
 
 def launch_services(configurations, container_id):
     client = docker.from_env()
+    clear_container_if_exists("dns-server")
     client.containers.run(
         DNS_IMAGE, 
         "-conf {conf}".format(conf=os.path.join(CONFIG_DIRECTORY, 'dns.conf')),
@@ -114,9 +123,11 @@ def launch_services(configurations, container_id):
     )
     for name in configurations['networks']:
         network = configurations['networks'][name]
+        container_name = "dhcp-{domain}-server".format(domain=name)
+        clear_container_if_exists(container_name)
         client.containers.run(
             DHCP_IMAGE, 
-            name="dhcp-{domain}-server".format(domain=name),
+            name=container_name,
             network_mode="host",
             volumes_from=container_id,
             restart_policy={'name': 'always'},
