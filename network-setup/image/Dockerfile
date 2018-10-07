@@ -9,7 +9,7 @@ RUN pip install Jinja2 pyyaml docker && mkdir -p $SCRIPT_DIRECTORY && mkdir -p $
 ENV DNS_IMAGE=coredns/coredns:latest
 ENV DHCP_IMAGE=magnitus/isc-dhcp-server:latest
 
-COPY generate_config.py $SCRIPT_DIRECTORY/
+COPY setup.py $SCRIPT_DIRECTORY/
 COPY *.j2 $TEMPLATE_DIRECTORY/
 
-CMD ["/opt/scripts/generate_config.py"]
+CMD ["/opt/scripts/setup.py"]

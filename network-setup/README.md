@@ -27,4 +27,12 @@ Then, run:
 ```
 docker-compose run setup
 ```
+# Idempotency of the scripts
 
+You can regenerate the containers with configuration file changes by re-executing the docker-compose command.
+
+There will be brief moment where the services will be unresponsive if you do this however.
+
+While I know that CoreDNS supports graceful restart with new configurations, I'm less certain the isc dhcp supports it making the point of a gracefully restart moot.
+
+The most graceful solution to conteract this may be to setup failover dhcp servers (https://kb.isc.org/docs/aa-00502).

@@ -12,7 +12,7 @@ networks:
       ip: 192.168.10.3
       name: dummy_one
     - mac: "11:11:11:11:11:11"
-      ip: 192.168.11.4
+      ip: 192.168.10.4
       name: dummy_two
 
   admin:
