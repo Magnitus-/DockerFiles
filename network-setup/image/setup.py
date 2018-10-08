@@ -36,7 +36,7 @@ def get_configurations():
     with open('/opt/conf') as config_file:
         return load(config_file)
 
-route_ip_regex = re.compile('src[ ](?P<ip>[0-9]+[.][0-9]+[.][0-9]+[.][0-9]+)[ ]')
+route_ip_regex = re.compile('src[ ](?P<ip>[0-9]+[.][0-9]+[.][0-9]+[.][0-9]+)')
 def get_interfaces_ip_maps(configurations):
     interfaces_ip_maps = {}
     client = docker.from_env()

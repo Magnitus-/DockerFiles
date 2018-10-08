@@ -5,6 +5,8 @@ This container sets up dockerized dhcp and dns servers on a networked machine ba
 The following manual tasks still needs to be done before running this container:
 - Setup the routing
 - Setup a static ip on the network interfaces of the machine hosting the dhcp/dns containers
+- Potentially disable existing services that are already listening on port 53 on the machine (https://askubuntu.com/questions/907246/how-to-disable-systemd-resolved-in-ubuntu)
+- As a result of the above step, you might have to add your local hostname to the **/etc/hosts** file and add your localhost to **/etc/resolv.conf** (other machines on the network should not require those steps)
 
 From there, assuming your configuration is comprehensive, ip and name assignment will be handled from a centralized configuration file on the machine running the dhcp/dns servers.
 
