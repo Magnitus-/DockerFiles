@@ -4,6 +4,15 @@ This image facilitates the operation of a headless Factorio server by wrapping t
 
 Given that the binary is not MIT, I won't publish the image on Docker Hub, but you can build it yourself from the Dockerfile here.
 
+# Running Demo Environment
+
+To run the server on your local machine, follow the steps below.
+
+1. Edit the docker-compose file to change the whitelist adminlist and any other settings you want to change (see environment variables below)
+2. Make sure you have docker and docker-compose installed
+3. Run: **docker-compose up -d**
+4. Open Factorio, click on: Play > Multiplayer > Connect to a Server (enter 127.0.0.1:8080 in the box)
+
 # Environment Variables
 
 The behavior of the server is customizable with the following environment variables:
