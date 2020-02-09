@@ -31,6 +31,8 @@ The behavior of the server is customizable with the following environment variab
 - BITER_FREE_STARTING_AREA: Multiplier of the normal enemy free radius in the early game as an integer. Defaults to 1.
 - WATER_ELEVATION: Multiplier on the normal water levels (to have more water, less land), with a log applied to it before multiplying. Defaults to 1.
 - PEACEFUL_MODE: Whether you have enemies or not as 'true' or 'false'. Defaults to 'false' (ie, you have enemies)
+- ADMIN_PLAYERS: Comma separated list of players that you want to be admin. If missing, the will be no admin.
+- WHITELISTED_PLAYERS: Comma separated list of players to allow. If missing, anyone who can supply the game's password is allowed.
 
 There are also various environment variables to set the amount (frequency, size, richness) of various starting resources, but I'm getting lazy. Please, look at the configs.py code file for their names.
 
@@ -40,3 +42,8 @@ Note that the headless server binary supplied by the makers of Factorio is highl
 
 You should mount a bind a volume on your machine to the following path in the container to persist data: /opt/data
 
+# Caveats
+
+Currently, only non-public mode with no centralized account and no LAN broadcast is supported because that was my use-case which I could troubleshoot.
+
+Also, I could not make it work inside a docker network with port fowarding so right now, it only works if you run the container on the host network.

@@ -3,8 +3,7 @@ services:
   factorio-headless-server:
     image: magnitus/factorio-headless-server:0.17.79
     build: .
-    ports:
-      - "8080:8080"
+    network_mode: "host"
     environment:
       GAME_NAME: "Friendly Game"
       GAME_DESCRIPTION: "Friendly Game"
