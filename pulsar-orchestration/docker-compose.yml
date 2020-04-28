@@ -12,7 +12,7 @@ services:
       ZOO_CONF_DIR: /conf
       ZOO_MY_ID: 1
     networks:
-      - zookeeper
+      - pulsar-internal
   zookeeper-two:
     image: zookeeper:3.6
     restart: always
@@ -25,7 +25,7 @@ services:
       ZOO_CONF_DIR: /conf
       ZOO_MY_ID: 2
     networks:
-      - zookeeper
+      - pulsar-internal
   zookeeper-three:
     image: zookeeper:3.6
     restart: always
@@ -38,10 +38,37 @@ services:
       ZOO_CONF_DIR: /conf
       ZOO_MY_ID: 3
     networks:
-      - zookeeper
+      - pulsar-internal
+  bookie-one:
+    image: apachepulsar/pulsar:2.5.1
+    restart: always
+    volumes:
+      - "./bookkeeper-conf/bookkeeper.conf:/pulsar/conf/bookkeeper.conf"
+      - "./bookie/one/data:/pulsar/data"
+    command: ["bin/bookkeeper", "bookie"]
+    networks:
+      - pulsar-internal
+  bookie-two:
+    image: apachepulsar/pulsar:2.5.1
+    restart: always
+    volumes:
+      - "./bookkeeper-conf/bookkeeper.conf:/pulsar/conf/bookkeeper.conf"
+      - "./bookie/two/data:/pulsar/data"
+    command: ["bin/bookkeeper", "bookie"]
+    networks:
+      - pulsar-internal
+  bookie-three:
+    image: apachepulsar/pulsar:2.5.1
+    restart: always
+    volumes:
+      - "./bookkeeper-conf/bookkeeper.conf:/pulsar/conf/bookkeeper.conf"
+      - "./bookie/three/data:/pulsar/data"
+    command: ["bin/bookkeeper", "bookie"]
+    networks:
+      - pulsar-internal
 
 networks:
   pulsar:
     name: pulsar
-  zookeeper:
-    name: zookeeper
+  pulsar-internal:
+    name: pulsar-internal

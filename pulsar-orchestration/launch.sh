@@ -8,8 +8,15 @@ if [ ! -d "./zookeeper" ]; then
     mkdir -p zookeeper/three/data;
     mkdir -p zookeeper/three/datalog;
 fi
-docker-compose up -d
+docker-compose up -d zookeeper-one zookeeper-two zookeeper-three;
+sleep 10;
 if [ "$ZOOKEEPER_SET" = "no" ]; then
-    sleep 10;
     ./configure_zookeeper.sh;
 fi
+
+if [ ! -d "./bookie" ]; then
+    mkdir -p bookie/one/data;
+    mkdir -p bookie/two/data;
+    mkdir -p bookie/three/data;
+fi
+docker-compose up -d bookie-one bookie-two bookie-three;

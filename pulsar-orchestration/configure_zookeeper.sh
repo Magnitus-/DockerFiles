@@ -1,5 +1,5 @@
 docker run --rm \
-           --network zookeeper \
+           --network pulsar-internal \
            --entrypoint="" \
            apachepulsar/pulsar:2.5.1 bin/pulsar initialize-cluster-metadata \
            --cluster pulsar-cluster-1 \
