@@ -66,6 +66,19 @@ services:
     command: ["bin/bookkeeper", "bookie"]
     networks:
       - pulsar-internal
+  broker:
+    image: apachepulsar/pulsar:2.5.1
+    #Will technically be ignored with scripts in non-swarm mode, but this conveys the idea. 
+    #This is cattle.
+    deploy:
+      replicas: 3
+    restart: always
+    volumes:
+      - "./broker-conf/broker.conf:/pulsar/conf/broker.conf"
+    command: ["bin/pulsar", "broker"]
+    networks:
+      - pulsar
+      - pulsar-internal
 
 networks:
   pulsar:

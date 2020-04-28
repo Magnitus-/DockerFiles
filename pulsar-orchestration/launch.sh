@@ -20,3 +20,6 @@ if [ ! -d "./bookie" ]; then
     mkdir -p bookie/three/data;
 fi
 docker-compose up -d bookie-one bookie-two bookie-three;
+sleep 10;
+
+docker-compose up -d broker;
