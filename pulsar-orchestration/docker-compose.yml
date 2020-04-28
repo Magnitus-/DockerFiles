@@ -1,0 +1,45 @@
+version: '3.5'
+services:
+  zookeeper-one:
+    image: zookeeper:3.6
+    restart: always
+    hostname: zookeeper-one
+    volumes:
+      - "./zookeeper/one/data:/data"
+      - "./zookeeper/one/datalog:/datalog"
+      - "./zookeeper-conf/zoo.cfg:/conf/zoo.cfg"
+    environment:
+      ZOO_CONF_DIR: /conf
+      ZOO_MY_ID: 1
+    networks:
+      - zookeeper
+  zookeeper-two:
+    image: zookeeper:3.6
+    restart: always
+    hostname: zookeeper-two
+    volumes:
+      - "./zookeeper/two/data:/data"
+      - "./zookeeper/two/datalog:/datalog"
+      - "./zookeeper-conf/zoo.cfg:/conf/zoo.cfg"
+    environment:
+      ZOO_CONF_DIR: /conf
+      ZOO_MY_ID: 2
+    networks:
+      - zookeeper
+  zookeeper-three:
+    image: zookeeper:3.6
+    restart: always
+    hostname: zookeeper-three
+    volumes:
+      - "./zookeeper/three/data:/data"
+      - "./zookeeper/three/datalog:/datalog"
+      - "./zookeeper-conf/zoo.cfg:/conf/zoo.cfg"
+    environment:
+      ZOO_CONF_DIR: /conf
+      ZOO_MY_ID: 3
+    networks:
+      - zookeeper
+
+networks:
+  pulsar:
+  zookeeper:
