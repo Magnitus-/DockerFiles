@@ -42,4 +42,6 @@ services:
 
 networks:
   pulsar:
+    name: pulsar
   zookeeper:
+    name: zookeeper
