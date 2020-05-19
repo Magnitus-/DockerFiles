@@ -1,0 +1,15 @@
+name: Build Remote Terraform Image
+
+on:
+  push:
+    paths:
+    - 'remote-terraform/**'
+
+jobs:
+  publish:
+    name: Build Image
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the image
+      run: cd remote-terraform && docker build -t test:test .

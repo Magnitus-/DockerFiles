@@ -1,3 +1,6 @@
+![](https://github.com/Magnitus-/DockerFiles/workflows/Build%20Remote%20Terraform%20Image/badge.svg)
+![](https://github.com/Magnitus-/DockerFiles/workflows/Publish%20Remote%20Terraform%20Image/badge.svg)
+
 # About
 
 This image is to run terraform remotely on a bastion in case you need to provision against a private cloud provider whose api is not publicly available (ex: private openstack).
@@ -25,7 +28,7 @@ This image is executed outside of the bastion. It performs the following steps o
 Here is a usage example:
 
 ```
-docker run -v $(pwd)/infra:/opt/terraform -v $(pwd)/hosts:/opt/inventory -v $HOME/.ssh/id_rsa:/opt/keys/id_rsa -v $HOME/.ssh/known_hosts:/root/.ssh/known_hosts -e "ANSIBLE_USER=ubuntu" magnitus/remote-terraform:latest terraform_plan
+docker run -v $(pwd)/infra:/opt/terraform -v $(pwd)/hosts:/opt/inventory -v $HOME/.ssh/id_rsa:/opt/keys/id_rsa -v $HOME/.ssh/known_hosts:/root/.ssh/known_hosts -e "ANSIBLE_USER=ubuntu" magnitus/remote-terraform:1.0.0 terraform_plan
 ```
 
 - The **infra** subdirectory in the working directory contains the terraform scripts
