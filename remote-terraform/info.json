@@ -1,4 +1,4 @@
 {
     "version": "1.0.0",
-    "image_repo": "magnitus/overture-client"
+    "image_repo": "magnitus/remote-terraform"
 }
