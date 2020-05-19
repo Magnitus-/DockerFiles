@@ -1,0 +1,71 @@
+- name: Run terraform init on the remote machine
+  docker_container:
+    image: "{{ remote_terraform_image }}"
+    name: "{{ remote_container_name }}"
+    network_mode: host
+    volumes:
+      - "{{ remote_terraform_config_dir }}:/opt/terraform_config"
+      - "{{ remote_terraform_state_dir }}:/opt/terraform_state"
+    working_dir: "/opt/terraform_config"
+    detach: false
+    recreate: true
+    state: started
+    entrypoint: ""
+    command: "terraform init"
+  register: init_output
+
+- name: Get init output
+  debug:
+    msg: "{{ init_output.ansible_facts.docker_container.Output }}"
+
+- name: Cleanup terraform init on the remote machine
+  docker_container:
+    image: "{{ remote_terraform_image }}"
+    name: "{{ remote_container_name }}"
+    network_mode: host
+    volumes:
+      - "{{ remote_terraform_config_dir }}:/opt/terraform_config"
+      - "{{ remote_terraform_state_dir }}:/opt/terraform_state"
+    working_dir: "/opt/terraform_config"
+    detach: false
+    recreate: true
+    state: started
+    entrypoint: ""
+    command: "terraform init"
+    state: absent
+
+- name: Run terraform plan on the remote machine
+  docker_container:
+    image: "{{ remote_terraform_image }}"
+    name: "{{ remote_container_name }}"
+    network_mode: host
+    volumes:
+      - "{{ remote_terraform_config_dir }}:/opt/terraform_config"
+      - "{{ remote_terraform_state_dir }}:/opt/terraform_state"
+    working_dir: "/opt/terraform_config"
+    detach: false
+    recreate: true
+    state: started
+    entrypoint: ""
+    command: "terraform plan -state /opt/terraform_state/terraform.tfstate"
+  register: plan_output
+
+- name: Get plan output
+  debug:
+    msg: "{{ plan_output.ansible_facts.docker_container.Output }}"
+
+- name: Cleanup terraform plan on the remote machine
+  docker_container:
+    image: "{{ remote_terraform_image }}"
+    name: "{{ remote_container_name }}"
+    network_mode: host
+    volumes:
+      - "{{ remote_terraform_config_dir }}:/opt/terraform_config"
+      - "{{ remote_terraform_state_dir }}:/opt/terraform_state"
+    working_dir: "/opt/terraform_config"
+    detach: false
+    recreate: true
+    state: started
+    entrypoint: ""
+    command: "terraform plan -state /opt/terraform_state/terraform.tfstate"
+    state: absent

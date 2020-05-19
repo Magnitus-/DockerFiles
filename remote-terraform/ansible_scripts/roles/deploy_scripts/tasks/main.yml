@@ -1,0 +1,4 @@
+- name: Copy terraform configuration to bastion
+  copy:
+    src: "terraform/"
+    dest: "{{ remote_terraform_config_dir }}/"

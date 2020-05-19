@@ -1,0 +1,71 @@
+- name: Run terraform init on the remote machine
+  docker_container:
+    image: "{{ remote_terraform_image }}"
+    name: "{{ remote_container_name }}"
+    network_mode: host
+    volumes:
+      - "{{ remote_terraform_config_dir }}:/opt/terraform_config"
+      - "{{ remote_terraform_state_dir }}:/opt/terraform_state"
+    working_dir: "/opt/terraform_config"
+    detach: false
+    recreate: true
+    state: started
+    entrypoint: ""
+    command: "terraform init"
+  register: init_output
+
+- name: Get init output
+  debug:
+    msg: "{{ init_output.ansible_facts.docker_container.Output }}"
+
+- name: Cleanup terraform init on the remote machine
+  docker_container:
+    image: "{{ remote_terraform_image }}"
+    name: "{{ remote_container_name }}"
+    network_mode: host
+    volumes:
+      - "{{ remote_terraform_config_dir }}:/opt/terraform_config"
+      - "{{ remote_terraform_state_dir }}:/opt/terraform_state"
+    working_dir: "/opt/terraform_config"
+    detach: false
+    recreate: true
+    state: started
+    entrypoint: ""
+    command: "terraform init"
+    state: absent
+
+- name: Run terraform apply on the remote machine
+  docker_container:
+    image: "{{ remote_terraform_image }}"
+    name: "{{ remote_container_name }}"
+    network_mode: host
+    volumes:
+      - "{{ remote_terraform_config_dir }}:/opt/terraform_config"
+      - "{{ remote_terraform_state_dir }}:/opt/terraform_state"
+    working_dir: "/opt/terraform_config"
+    detach: false
+    recreate: true
+    state: started
+    entrypoint: ""
+    command: "terraform apply -auto-approve -state /opt/terraform_state/terraform.tfstate"
+  register: apply_output
+
+- name: Get apply output
+  debug:
+    msg: "{{ apply_output.ansible_facts.docker_container.Output }}"
+
+- name: Cleanup terraform apply on the remote machine
+  docker_container:
+    image: "{{ remote_terraform_image }}"
+    name: "{{ remote_container_name }}"
+    network_mode: host
+    volumes:
+      - "{{ remote_terraform_config_dir }}:/opt/terraform_config"
+      - "{{ remote_terraform_state_dir }}:/opt/terraform_state"
+    working_dir: "/opt/terraform_config"
+    detach: false
+    recreate: true
+    state: started
+    entrypoint: ""
+    command: "terraform apply -auto-approve -state /opt/terraform_state/terraform.tfstate"
+    state: absent

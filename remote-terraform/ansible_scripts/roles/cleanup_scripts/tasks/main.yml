@@ -1,0 +1,4 @@
+- name: Remove terraform configuration from bastion
+  file:
+    path: "{{ remote_terraform_config_dir }}"
+    state: absent

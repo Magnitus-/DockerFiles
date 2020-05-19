@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+mkdir -p /opt/bastion_terraform/roles/deploy_scripts/files
+cp -r $TERRAFORM_DIR /opt/bastion_terraform/roles/deploy_scripts/files/terraform
+ansible-playbook /opt/bastion_terraform/plan.yml --private-key=$PRIVATE_SSH_KEY -u $ANSIBLE_USER -i $INVENTORY

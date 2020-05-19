@@ -1,0 +1,35 @@
+---
+- name: Set directory to upload terraform scripts
+  hosts: all
+  tasks:
+  - set_fact: remote_terraform_config_dir="{{ lookup('env','REMOTE_TERRAFORM_CONFIG_DIR') }}"
+
+- name: Set file to store terraform state
+  hosts: all
+  tasks:
+  - set_fact: remote_terraform_state_dir="{{ lookup('env','REMOTE_TERRAFORM_STATE_DIR') }}"
+
+- name: Set image to execute terraform configuration from
+  hosts: all
+  tasks:
+  - set_fact: remote_terraform_image="{{ lookup('env','REMOTE_TERRAFORM_IMAGE') }}"
+
+- name: Set remote container name to run terraform operation in
+  hosts: all
+  tasks:
+  - set_fact: remote_container_name="{{ lookup('env','REMOTE_CONTAINER_NAME') }}"
+
+- name: Upload terraform configuration
+  hosts: all
+  roles:
+  - { role: ./roles/deploy_scripts, become: true }
+
+- name: Run terraform plan
+  hosts: all
+  roles:
+  - { role: ./roles/terraform_plan, become: true }
+
+- name: Cleanup terraform configuration
+  hosts: all
+  roles:
+  - { role: ./roles/cleanup_scripts, become: true }
