@@ -1,0 +1,16 @@
+
+version: '3.5'
+services:
+  terraria-headless-server:
+    image: magnitus/terraria-headless-server:1405
+    build: ./image
+    network_mode: "host"
+    volumes:
+      - ./configs.txt:/opt/configs.txt
+      - ./world:/opt/world
+    restart: always
+    command: ["-autocreate", "3"]
+    #command: ["-config", "/opt/configs.txt"]
+
+volumes:
+  factorio-data: {}
