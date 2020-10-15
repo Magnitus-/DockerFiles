@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ -z "$PRIVATE_KEY" ]; then
+    echo "Private ssh key need to be defined with the PUBLIC_KEY environment variable";
+    exit 1;
+fi
+
+if [ -z "$FILE" ]; then
+    echo "Target file need to be defined with the FILE environment variable";
+    exit 1;
+fi
+
+FILE_DIR=$(dirname $FILE)
+
+#Decrypt symmetric key with private key
+openssl rsautl -decrypt -inkey $PRIVATE_KEY -in $FILE_DIR/symmetric_key.encrypted -out symmetric_key;
+#Decrypt secret with symmetric key
+openssl aes-256-cbc -md sha512 -pbkdf2 -iter 100000 -salt -d -in ${FILE}.encrypted -out $FILE -pass file:symmetric_key
+
+#Cleanup decryption artifacts
+rm symmetric_key;
+rm $FILE_DIR/symmetric_key.encrypted;
+rm ${FILE}.encrypted;

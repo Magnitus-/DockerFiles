@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if [ -z "$PUBLIC_KEY" ]; then
+    echo "Public ssh key need to be defined with the PUBLIC_KEY environment variable";
+    exit 1;
+fi
+
+if [ -z "$FILE" ]; then
+    echo "Target file need to be defined with the FILE environment variable";
+    exit 1;
+fi
+
+FILE_DIR=$(dirname $FILE)
+
+#Change public ssh key to pem format
+ssh-keygen -f $PUBLIC_KEY -e -m PKCS8 > id_rsa.pem.pub;
+#Generate symmetric key
+openssl rand -out symmetric_key 32;
+#Encrypt file with symmetric key
+openssl aes-256-cbc -md sha512 -pbkdf2 -iter 100000 -salt -in $FILE -out ${FILE}.encrypted -pass file:symmetric_key;
+#Encrypt symmetric key with public key
+openssl rsautl -encrypt -pubin -inkey id_rsa.pem.pub -ssl -in symmetric_key -out $FILE_DIR/symmetric_key.encrypted;
+
+#Cleanup unencrypted secrets
+rm $FILE;
+rm symmetric_key;
+
+#Cleanup encryption artifacts
+rm id_rsa.pem.pub;

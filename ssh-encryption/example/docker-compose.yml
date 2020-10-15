@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  encrypt:
+    build: ../image
+    command: ssh-encrypt
+    environment:
+      FILE: /opt/target/test.txt
+      PUBLIC_KEY: /opt/.ssh/id_rsa.pub
+    volumes:
+      - ./:/opt/target
+      - ~/.ssh:/opt/.ssh
+  decrypt:
+    build: ../image
+    command: ssh-decrypt
+    environment:
+      FILE: /opt/target/test.txt
+      PRIVATE_KEY: /opt/.ssh/id_rsa
+    volumes:
+      - ./:/opt/target
+      - ~/.ssh:/opt/.ssh
