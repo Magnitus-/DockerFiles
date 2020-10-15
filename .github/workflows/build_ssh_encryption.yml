@@ -1,0 +1,15 @@
+name: Build Ssh Encryption Image
+
+on:
+  push:
+    paths:
+    - 'ssh-encryption/**'
+
+jobs:
+  publish:
+    name: Build Image
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the image
+      run: cd ssh-encryption/image && docker build -t test:test .
