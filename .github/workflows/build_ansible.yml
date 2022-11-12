@@ -1,0 +1,15 @@
+name: Build Ansible Image
+
+on:
+  push:
+    paths:
+    - 'ansible/**'
+
+jobs:
+  publish:
+    name: Build Image
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the image
+      run: cd ansible && docker build -t test:test .

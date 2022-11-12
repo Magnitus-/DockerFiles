@@ -1,0 +1,19 @@
+name: Publish Ansible Image
+
+on:
+  push:
+    branches:
+    - master
+    paths:
+    - 'ansible/**'
+
+jobs:
+  publish:
+    name: Publish Image
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Log into registry
+      run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u magnitus --password-stdin
+    - name: Publish the image
+      run: cd ansible && ./push_image.sh
